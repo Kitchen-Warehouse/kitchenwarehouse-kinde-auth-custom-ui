@@ -14,7 +14,6 @@ export const workflowSettings = {
   };
 
   export default async function TestWorkflow() {
-    const idToken = idTokenCustomClaims() as { customerId?: string }
+    const idToken = idTokenCustomClaims()
     console.log({idToken})
-    idToken.customerId = "03dead9c-42fe-4f54-9638-d34ecfce694a"
   }
