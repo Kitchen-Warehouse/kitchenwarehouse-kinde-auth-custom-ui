@@ -1,7 +1,6 @@
 import {
   WorkflowTrigger,
   accessTokenCustomClaims,
-  onUserTokenGeneratedEvent,
   fetch,
 } from '@kinde/infrastructure';
 
@@ -18,14 +17,10 @@ export const workflowSettings = {
   },
 };
 
-export default async function TestWorkflow(event: onUserTokenGeneratedEvent) {
+export default async function TestWorkflow() {
   const accessToken = accessTokenCustomClaims<{
     email: string;
-    user_properties: {
-      customer_id: {
-        v: string;
-      };
-    };
+    customerId: string;
   }>();
 
   const body = new URLSearchParams();
@@ -35,13 +30,13 @@ export default async function TestWorkflow(event: onUserTokenGeneratedEvent) {
     'https://get-kwh-customer-by-email.netlify.app/get-user',
     {
       method: 'GET',
-      headers:{},
-      body
+      headers: {},
+      body,
     }
   );
 
-  console.log('response', data?.body?.id,accessToken);
+  console.log('response', data?.body?.id, accessToken);
   // // accessToken.email
 
-  accessToken.user_properties.customer_id.v = data?.body?.id;
+  accessToken.customerId = data?.body?.id;
 }
