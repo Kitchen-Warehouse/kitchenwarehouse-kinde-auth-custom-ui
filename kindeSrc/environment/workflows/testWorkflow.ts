@@ -18,10 +18,30 @@ export const workflowSettings = {
 
 export default async function TestWorkflow() {
   const accessToken = accessTokenCustomClaims<{
-    customerId: string;
+    email: string;
+    user_properties: {
+      customer_id: {
+        v: string;
+      };
+    };
   }>();
 
-  console.log({accessToken})
+  const response = await fetch(
+    'https://get-kwh-customer-by-email.netlify.app/get-user',
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        email: accessToken.email,
+      }),
+    }
+  );
 
-  accessToken.customerId = 'test-customerId'
+  const res: {
+    body: { id: string };
+  } = await response.json();
+
+  console.log('response', res);
+  // accessToken.email
+
+  accessToken.user_properties.customer_id.v = res?.body?.id;
 }
