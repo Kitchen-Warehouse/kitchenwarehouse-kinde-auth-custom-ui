@@ -27,7 +27,8 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
   const isNewKindeUser = event.context.auth.isNewUserRecordCreated;
   console.log({userId:  event.context.user,isNewKindeUser})
   const body = new URLSearchParams();
-  body.append('email', accessToken.email);
+  const userId = event.context.user.id
+  body.append('userId', userId);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const response: any = await fetch(
     'https://get-kwh-customer-by-email.netlify.app/get-user',
@@ -40,7 +41,7 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
   );
 
   console.log('response', response?.data);
-  console.log({response, email:accessToken.email,accessToken})
+  console.log({response, accessToken})
   // // accessToken.email
 
   accessToken.customerId = response?.data;
