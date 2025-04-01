@@ -1,6 +1,7 @@
 import {
   WorkflowTrigger,
   accessTokenCustomClaims,
+  createKindeAPI,
 } from '@kinde/infrastructure';
 
 export const workflowSettings = {
@@ -16,10 +17,10 @@ export const workflowSettings = {
   },
 };
 
-export default async function TestWorkflow() {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function TestWorkflow(event:any) {
   const accessToken = accessTokenCustomClaims<{
     email: string;
-    customerId: string;
     user_properties: {
       customer_id: {
         v: string;
@@ -27,23 +28,28 @@ export default async function TestWorkflow() {
     };
   }>();
 
-  const response = await fetch(
-    'https://get-kwh-customer-by-email.netlify.app/get-user',
-    {
-      method: 'GET',
-      body: JSON.stringify({
-        email: accessToken.email,
-      }),
-    }
-  );
+  const kindeAPI = await createKindeAPI(event);
 
-  const res: {
-    body: { id: string };
-  } = await response.json();
+  const { data } = await kindeAPI.get({
+    endpoint: `applications/${event.context.application.clientId}/properties`,
+  });
+  const {appProperties} = data;
 
-  console.log('response', res);
-  // accessToken.email
+  console.log({appProperties})
 
-  // accessToken.user_properties.customer_id.v = res?.body?.id;
-  accessToken.customerId = res?.body?.id;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // const { data }: any = await fetch(
+  //   'https://get-kwh-customer-by-email.netlify.app/get-user',
+  //   {
+  //     method: 'GET',
+  //     body: JSON.stringify({
+  //       email: accessToken.email,
+  //     }),
+  //   }
+  // );
+
+  // console.log('response', data);
+  // // accessToken.email
+
+  // accessToken.user_properties.customer_id.v = data?.body?.id;
 }
