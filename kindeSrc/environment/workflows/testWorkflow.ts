@@ -26,7 +26,7 @@ export default async function TestWorkflow() {
   const body = new URLSearchParams();
   body.append('email', accessToken.email);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data }: any = await fetch(
+  const data: any = await fetch(
     'https://get-kwh-customer-by-email.netlify.app/get-user',
     {
       method: 'POST',
@@ -36,7 +36,7 @@ export default async function TestWorkflow() {
     }
   );
 
-  console.log('response', data?.body?.id, accessToken);
+  console.log('response', data?.body?.id, data);
   // // accessToken.email
 
   accessToken.customerId = data?.body?.id;
