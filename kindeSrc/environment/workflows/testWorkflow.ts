@@ -28,7 +28,6 @@ export default async function TestWorkflow(event: onUserTokenGeneratedEvent) {
     };
   }>();
 
-  console.log({ event });
   const body = new URLSearchParams();
   body.append('email', accessToken.email);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -41,7 +40,7 @@ export default async function TestWorkflow(event: onUserTokenGeneratedEvent) {
     }
   );
 
-  console.log('response', data);
+  console.log('response', data?.body?.id,accessToken);
   // // accessToken.email
 
   accessToken.user_properties.customer_id.v = data?.body?.id;
