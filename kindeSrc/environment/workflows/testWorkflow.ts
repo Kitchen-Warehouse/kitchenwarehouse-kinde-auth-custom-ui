@@ -30,6 +30,7 @@ export default async function TestWorkflow() {
     'https://get-kwh-customer-by-email.netlify.app/get-user',
     {
       method: 'GET',
+      responseFormat: 'text',
       headers: {},
       body,
     }
