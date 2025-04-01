@@ -35,9 +35,9 @@ export default async function TestWorkflow() {
       body,
     }
   );
-const res = await JSON.parse(data)
 
-  console.log('response', data?.body?.id, res);
+  console.log('response', data?.body?.id);
+  console.log({data})
   // // accessToken.email
 
   accessToken.customerId = data?.body?.id;
