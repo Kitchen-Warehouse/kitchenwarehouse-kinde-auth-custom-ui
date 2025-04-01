@@ -2,11 +2,12 @@ import {
   WorkflowTrigger,
   accessTokenCustomClaims,
   fetch,
+  onPostAuthenticationEvent,
 } from '@kinde/infrastructure';
 
 export const workflowSettings = {
-  id: 'addAccessTokenClaim',
-  trigger: WorkflowTrigger.UserTokenGeneration,
+  id: 'postAuthentication',
+  trigger: WorkflowTrigger.PostAuthentication,
   bindings: {
     'kinde.accessToken': {},
     'kinde.localization': {},
@@ -17,12 +18,14 @@ export const workflowSettings = {
   },
 };
 
-export default async function TestWorkflow() {
+export default async function TestWorkflow(event: onPostAuthenticationEvent) {
   const accessToken = accessTokenCustomClaims<{
     email: string;
     customerId: string;
   }>();
-
+  console.log({event})
+  const isNewKindeUser = event.context.auth.isNewUserRecordCreated;
+  console.log({userId:  event.context.user,isNewKindeUser})
   const body = new URLSearchParams();
   body.append('email', accessToken.email);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
