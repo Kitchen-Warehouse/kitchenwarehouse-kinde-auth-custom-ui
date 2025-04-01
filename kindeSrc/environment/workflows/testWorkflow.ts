@@ -19,6 +19,7 @@ export const workflowSettings = {
 export default async function TestWorkflow() {
   const accessToken = accessTokenCustomClaims<{
     email: string;
+    customerId: string;
     user_properties: {
       customer_id: {
         v: string;
@@ -43,5 +44,6 @@ export default async function TestWorkflow() {
   console.log('response', res);
   // accessToken.email
 
-  accessToken.user_properties.customer_id.v = res?.body?.id;
+  // accessToken.user_properties.customer_id.v = res?.body?.id;
+  accessToken.customerId = res?.body?.id;
 }
