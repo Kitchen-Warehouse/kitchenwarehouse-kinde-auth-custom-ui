@@ -46,7 +46,7 @@ export default async function TestWorkflow(event:any) {
   const kindeAPI = await createKindeAPI(event);
 
   const { data } = await kindeAPI.get({
-    endpoint: `applications/${event.context.application.clientId}/properties`,
+    endpoint: `applications/6c0470e618ab41cfb0cde02661df8734/properties`,
   });
   const {appProperties} = data;
 
