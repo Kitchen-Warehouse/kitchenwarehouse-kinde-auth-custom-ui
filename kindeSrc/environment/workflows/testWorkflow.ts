@@ -36,9 +36,9 @@ export default async function TestWorkflow() {
     }
   );
 
-  console.log('response', data?.data?.id);
+  console.log('response', data?.data);
   console.log({data})
   // // accessToken.email
 
-  accessToken.customerId = data?.data?.id;
+  accessToken.customerId = data?.data;
 }
