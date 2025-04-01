@@ -29,7 +29,7 @@ export default async function TestWorkflow() {
   const response = await fetch(
     'https://get-kwh-customer-by-email.netlify.app/get-user',
     {
-      method: 'POST',
+      method: 'GET',
       body: JSON.stringify({
         email: accessToken.email,
       }),
