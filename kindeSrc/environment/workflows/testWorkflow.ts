@@ -36,8 +36,10 @@ export default async function TestWorkflow() {
     }
   );
 
-  console.log('response', data?.body?.id, data);
+  const res = await data.json()
+
+  console.log('response', res?.body?.id, res);
   // // accessToken.email
 
-  accessToken.customerId = data?.body?.id;
+  accessToken.customerId = res?.body?.id;
 }
