@@ -21,6 +21,7 @@ export default async function TestWorkflow() {
     customerId: string;
   }>();
 
+  console.log({accessToken})
 
   accessToken.customerId = 'test-customerId'
 }
