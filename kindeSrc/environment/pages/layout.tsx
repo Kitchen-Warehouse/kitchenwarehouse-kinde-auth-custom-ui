@@ -34,9 +34,7 @@ export const Layout = ({
            .container {
               display: flex;
               width: 100%;
-              max-width: 1920px;
               justify-content: center;
-              margin: 0 auto;
               @media screen and (max-width: 1023px) {
                 flex-direction: column;
                 padding: 20px;
@@ -82,12 +80,20 @@ export const Layout = ({
               letter-spacing: -0.14px;
               padding-block-end: 4px;
             }
+            
+            .kinde-button:hover {
+              background-color:#aa2a22;
+            }
 
             .kinde-button-text {
               font-size: 18px;
               line-height: 28px;
               letter-spacing: -0.36px;
               font-weight: 600;
+            }
+
+            .kinde-text-button {
+              text-decoration: underline;            
             }
 
             .kinde-choice-separator {

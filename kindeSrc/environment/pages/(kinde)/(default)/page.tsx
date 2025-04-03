@@ -18,19 +18,21 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
         <main className='login-form-wrapper'>
           <div className='login-form'>
             <div className='logo-wrapper'>
-              <picture>
-                <source
-                  media='(prefers-color-scheme: dark)'
-                  srcSet={getDarkModeLogoUrl()}
-                />
-                <img
-                  className='logo'
-                  src={getLogoUrl()}
-                  alt={context.widget.content.logoAlt}
-                  width={152}
-                  height={32}
-                />
-              </picture>
+              <a href={`${process.env.KINDE_SITE_URL}`}>
+                <picture>
+                  <source
+                    media='(prefers-color-scheme: dark)'
+                    srcSet={getDarkModeLogoUrl()}
+                  />
+                  <img
+                    className='logo'
+                    src={getLogoUrl()}
+                    alt={context.widget.content.logoAlt}
+                    width={152}
+                    height={32}
+                  />
+                </picture>
+              </a>
             </div>
             {context.widget.content.heading && (
               <h2 className='heading'>{context.widget.content.heading}</h2>
@@ -42,7 +44,7 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
         <div className='side-panel'>
           <img
             className='side-panel-image'
-            src='https://media.kitchenwarehouse.com.au/image/upload/WebsiteContent/2025-01-17-d4793eb573e1ad22c3f46ea871e6471f.png'
+            src='https://media.kitchenwarehouse.com.au/image/upload/Kitchen%20Warehouse%20Images%20/kinde_login.png'
             alt='image'
           />
         </div>
