@@ -28,7 +28,6 @@ export const Layout = ({
         <title>{context.widget.content.pageTitle}</title>
         {getKindeRequiredCSS()}
         {getKindeRequiredJS()}
-        <link rel='stylesheet' href='/style.css'></link>
         <style nonce={getKindeNonce()}>
           {`
            .container {
