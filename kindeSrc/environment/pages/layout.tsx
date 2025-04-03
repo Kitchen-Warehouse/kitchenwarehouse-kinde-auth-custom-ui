@@ -86,7 +86,7 @@ export const Layout = ({
             }
             
             .kinde-button:hover {
-              background-color: #aa2a22;
+              background-color: #aa2a22 !important;
             }
 
             .kinde-control-select-text:focus-visible {
@@ -99,6 +99,10 @@ export const Layout = ({
               line-height: 28px;
               letter-spacing: -0.36px;
               font-weight: 600;
+            }
+
+            .kinde-form{
+            border: 1px solid red;
             }
 
             .kinde-text-button {
