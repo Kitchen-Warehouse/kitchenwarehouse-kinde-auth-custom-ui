@@ -80,9 +80,18 @@ export const Layout = ({
               letter-spacing: -0.14px;
               padding-block-end: 4px;
             }
+
+            .kinde-button {
+              background-color: #d4352b;
+            }
             
             .kinde-button:hover {
-              background-color:#aa2a22;
+              background-color: #aa2a22;
+            }
+
+            .kinde-control-select-text:focus-visible {
+              border: 1px solid transparent;
+              outline: 1px solid transparent;
             }
 
             .kinde-button-text {
@@ -93,7 +102,7 @@ export const Layout = ({
             }
 
             .kinde-text-button {
-              text-decoration: underline;            
+              text-decoration: underline !important;            
             }
 
             .kinde-choice-separator {
