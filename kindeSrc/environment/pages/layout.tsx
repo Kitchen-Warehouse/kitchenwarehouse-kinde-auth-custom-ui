@@ -28,12 +28,15 @@ export const Layout = ({
         <title>{context.widget.content.pageTitle}</title>
         {getKindeRequiredCSS()}
         {getKindeRequiredJS()}
+        <link rel='stylesheet' href='/style.css'></link>
         <style nonce={getKindeNonce()}>
           {`
            .container {
               display: flex;
               width: 100%;
+              max-width: 1920px;
               justify-content: center;
+              margin: 0 auto;
               @media screen and (max-width: 1023px) {
                 flex-direction: column;
                 padding: 20px;
@@ -80,32 +83,11 @@ export const Layout = ({
               padding-block-end: 4px;
             }
 
-            .kinde-button {
-              background-color: #d4352b;
-            }
-            
-            .kinde-button:hover {
-              background-color: #aa2a22 !important;
-            }
-
-            .kinde-control-select-text:focus-visible {
-              border: 1px solid transparent;
-              outline: 1px solid transparent;
-            }
-
             .kinde-button-text {
               font-size: 18px;
               line-height: 28px;
               letter-spacing: -0.36px;
               font-weight: 600;
-            }
-
-            .kinde-form{
-            border: 1px solid red;
-            }
-
-            .kinde-text-button {
-              text-decoration: underline !important;            
             }
 
             .kinde-choice-separator {
