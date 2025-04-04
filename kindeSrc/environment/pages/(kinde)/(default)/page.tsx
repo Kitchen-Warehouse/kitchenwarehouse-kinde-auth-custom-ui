@@ -18,7 +18,7 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
         <main className='login-form-wrapper'>
           <div className='login-form'>
             <div className='logo-wrapper'>
-              <a href={`${process.env.KINDE_SITE_URL}`}>
+              {/* <a href={`${process.env.KINDE_SITE_URL}`}> */}
                 <picture>
                   <source
                     media='(prefers-color-scheme: dark)'
@@ -32,7 +32,7 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
                     height={32}
                   />
                 </picture>
-              </a>
+              {/* </a> */}
             </div>
             {context.widget.content.heading && (
               <h2 className='heading'>{context.widget.content.heading}</h2>
