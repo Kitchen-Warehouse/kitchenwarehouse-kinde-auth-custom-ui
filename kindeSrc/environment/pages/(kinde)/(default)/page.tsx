@@ -10,7 +10,6 @@ import React from 'react';
 // @ts-expect-error: renderToString is not available in the server environment
 import { renderToString } from 'react-dom/server.browser';
 import Layout from '../../layout';
-import ClientLink from '@/app/components/ClientLink';
 
 const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
   return (
@@ -19,9 +18,9 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
         <main className='login-form-wrapper'>
           <div className='login-form'>
             <div className='logo-wrapper'>
-              <ClientLink href={`${process.env.KINDE_SITE_URL ?? '#'}`}>
+              <a href={`${process.env.KINDE_SITE_URL ?? '#'}`}>
                 test
-              </ClientLink>
+              </a>
               {/* <Link href={`${process.env.KINDE_SITE_URL ?? '#'}`}> */}
                 <picture>
                   <source
