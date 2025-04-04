@@ -89,8 +89,8 @@ export const Layout = ({
             }
 
             .kinde-control-select-text:focus-visible {
-              border: 1px solid transparent;
-              outline: 0.125rem solid #ababab;
+              border: 0.0625rem solid #ababab;
+              outline: 1px solid transparent;
             }
 
             .kinde-button-text {
