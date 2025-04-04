@@ -17,10 +17,7 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
       <div className='container'>
         <main className='login-form-wrapper'>
           <div className='login-form'>
-            <a
-              href='https://kwh-kitchenwarehouse.netlify.app/'
-              className='back-to-site'
-            >
+            <a href={`${process.env.KINDE_SITE_URL}`} className='back-to-site'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 width='24'
@@ -41,7 +38,7 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
               </svg>
               Back to site
             </a>
-            <a href='https://kwh-kitchenwarehouse.netlify.app/'>
+            <a href={`${process.env.KINDE_SITE_URL}`}>
               <div className='logo-wrapper'>
                 <picture>
                   <source
