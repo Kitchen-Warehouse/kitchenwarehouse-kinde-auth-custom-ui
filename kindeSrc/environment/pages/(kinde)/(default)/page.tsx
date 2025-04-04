@@ -17,25 +17,21 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
       <div className='container'>
         <main className='login-form-wrapper'>
           <div className='login-form'>
+            <a href={`/`}>test</a>
             <div className='logo-wrapper'>
-              <a href={`${process.env.KINDE_SITE_URL ?? '#'}`}>
-                test
-              </a>
-              {/* <Link href={`${process.env.KINDE_SITE_URL ?? '#'}`}> */}
-                <picture>
-                  <source
-                    media='(prefers-color-scheme: dark)'
-                    srcSet={getDarkModeLogoUrl()}
-                  />
-                  <img
-                    className='logo'
-                    src={getLogoUrl()}
-                    alt={context.widget.content.logoAlt}
-                    width={152}
-                    height={32}
-                  />
-                </picture>
-              {/* </Link> */}
+              <picture>
+                <source
+                  media='(prefers-color-scheme: dark)'
+                  srcSet={getDarkModeLogoUrl()}
+                />
+                <img
+                  className='logo'
+                  src={getLogoUrl()}
+                  alt={context.widget.content.logoAlt}
+                  width={152}
+                  height={32}
+                />
+              </picture>
             </div>
             {context.widget.content.heading && (
               <h2 className='heading'>{context.widget.content.heading}</h2>
