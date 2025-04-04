@@ -10,6 +10,7 @@ import React from 'react';
 // @ts-expect-error: renderToString is not available in the server environment
 import { renderToString } from 'react-dom/server.browser';
 import Layout from '../../layout';
+import Link from 'next/link';
 
 const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
   return (
@@ -18,7 +19,7 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
         <main className='login-form-wrapper'>
           <div className='login-form'>
             <div className='logo-wrapper'>
-              {/* <a href={`${process.env.KINDE_SITE_URL}`}> */}
+              <Link href={`${process.env.KINDE_SITE_URL}`}>
                 <picture>
                   <source
                     media='(prefers-color-scheme: dark)'
@@ -32,7 +33,7 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
                     height={32}
                   />
                 </picture>
-              {/* </a> */}
+                </Link>
             </div>
             {context.widget.content.heading && (
               <h2 className='heading'>{context.widget.content.heading}</h2>
