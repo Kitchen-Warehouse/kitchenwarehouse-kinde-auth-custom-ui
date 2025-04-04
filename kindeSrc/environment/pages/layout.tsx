@@ -45,6 +45,7 @@ export const Layout = ({
               gap: 4px;
               color: #1a1a1a;
               text-decoration: none;
+              font-weight: 600;
             }
 
             .login-form-wrapper {
