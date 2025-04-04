@@ -17,7 +17,7 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
       <div className='container'>
         <main className='login-form-wrapper'>
           <div className='login-form'>
-            <a href={`/`}>
+            <a href={`${process.env.KINDE_URL}/`}>
               <div className='logo-wrapper'>
                 <picture>
                   <source
