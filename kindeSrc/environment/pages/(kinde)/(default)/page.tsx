@@ -19,7 +19,7 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
           <div className='login-form'>
             <a
               href='https://kwh-kitchenwarehouse.netlify.app/'
-              style={{ display: 'flex', gap: '4px' }}
+              className='back-to-site'
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'

@@ -40,6 +40,13 @@ export const Layout = ({
               }
             }
 
+            .back-to-site {
+              display: flex;
+              gap: 4px;
+              color: #1a1a1a;
+              text-decoration: none;
+            }
+
             .login-form-wrapper {
               display: flex;
               width: 100%;
