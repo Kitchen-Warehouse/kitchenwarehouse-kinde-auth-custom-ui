@@ -17,22 +17,23 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
       <div className='container'>
         <main className='login-form-wrapper'>
           <div className='login-form'>
-            <a href={`/`}>test</a>
-            <div className='logo-wrapper'>
-              <picture>
-                <source
-                  media='(prefers-color-scheme: dark)'
-                  srcSet={getDarkModeLogoUrl()}
-                />
-                <img
-                  className='logo'
-                  src={getLogoUrl()}
-                  alt={context.widget.content.logoAlt}
-                  width={152}
-                  height={32}
-                />
-              </picture>
-            </div>
+            <a href={`/`}>
+              <div className='logo-wrapper'>
+                <picture>
+                  <source
+                    media='(prefers-color-scheme: dark)'
+                    srcSet={getDarkModeLogoUrl()}
+                  />
+                  <img
+                    className='logo'
+                    src={getLogoUrl()}
+                    alt={context.widget.content.logoAlt}
+                    width={152}
+                    height={32}
+                  />
+                </picture>
+              </div>
+            </a>
             {context.widget.content.heading && (
               <h2 className='heading'>{context.widget.content.heading}</h2>
             )}
