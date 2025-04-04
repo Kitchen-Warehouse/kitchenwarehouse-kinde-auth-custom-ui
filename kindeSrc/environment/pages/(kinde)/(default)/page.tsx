@@ -19,7 +19,7 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
         <main className='login-form-wrapper'>
           <div className='login-form'>
             <div className='logo-wrapper'>
-              <Link href={`${process.env.KINDE_SITE_URL}`}>
+              <Link href={`${process.env.KINDE_SITE_URL ?? '#'}`}>
                 <picture>
                   <source
                     media='(prefers-color-scheme: dark)'
