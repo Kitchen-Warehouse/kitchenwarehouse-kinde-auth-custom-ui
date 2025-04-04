@@ -90,7 +90,7 @@ export const Layout = ({
 
             .kinde-control-select-text:focus-visible {
               border: 1px solid transparent;
-              outline: 1px solid transparent;
+              outline: 0.125rem solid #ababab;
             }
 
             .kinde-button-text {
