@@ -1,9 +1,9 @@
 'use server';
 
 import {
-  getDarkModeLogoUrl,
+  // getDarkModeLogoUrl,
   getKindeWidget,
-  getLogoUrl,
+  // getLogoUrl,
   getEnvironmentVariable,
   type KindePageEvent,
 } from '@kinde/infrastructure';
