@@ -20,7 +20,7 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
       <div className='container'>
         <main className='login-form-wrapper'>
           <div className='login-form'>
-            <a href={'/'} className='back-to-site'>
+            {/* <a href={'/'} className='back-to-site'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 width='24'
@@ -57,7 +57,7 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
                   />
                 </picture>
               </div>
-            </a>
+            </a> */}
 
             {context.widget.content.heading && (
               <h2 className='heading'>{context.widget.content.heading}</h2>
