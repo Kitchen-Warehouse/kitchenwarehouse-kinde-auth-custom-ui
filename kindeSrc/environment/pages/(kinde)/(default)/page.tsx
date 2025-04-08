@@ -4,7 +4,6 @@ import {
   getDarkModeLogoUrl,
   getKindeWidget,
   getLogoUrl,
-  getEnvironmentVariable,
   type KindePageEvent,
 } from '@kinde/infrastructure';
 import React from 'react';
@@ -13,14 +12,15 @@ import { renderToString } from 'react-dom/server.browser';
 import Layout from '../../layout';
 
 const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
-  const kwhUrl = getEnvironmentVariable('KINDE_KWH_SITE_URL');
-  console.log('KWH URL:', kwhUrl);
   return (
     <Layout context={context} request={request}>
       <div className='container'>
         <main className='login-form-wrapper'>
           <div className='login-form'>
-            <a href='https://kwh-kitchenwarehouse.netlify.app/' className='back-to-site'>
+            <a
+              href='https://kwh-kitchenwarehouse.netlify.app/'
+              className='back-to-site'
+            >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 width='24'
@@ -41,7 +41,7 @@ const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
               </svg>
               Back to site
             </a>
-            <a href='https://kwh-kitchenwarehouse.netlify.app/' >
+            <a href='https://kwh-kitchenwarehouse.netlify.app/'>
               <div className='logo-wrapper'>
                 <picture>
                   <source
