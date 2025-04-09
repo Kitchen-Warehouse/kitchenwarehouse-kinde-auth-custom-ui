@@ -215,7 +215,13 @@ export const Layout = ({
       <footer>
         <div style={{ paddingBottom: '2.5rem' }}>
           {/* separator */}
-          <div style={{ borderTop: '1px solid #e6e6e6', width: '100%', marginTop: '1.5rem' }} />
+          <div
+            style={{
+              borderTop: '1px solid #e6e6e6',
+              width: '100%',
+              marginTop: '1.5rem',
+            }}
+          />
           <div
             style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}
           >
@@ -245,7 +251,7 @@ export const Layout = ({
               )}
               {helpNumber && (
                 <div>
-                  <a href={`tel:${helpNumber}`}>
+                  <a href={`tel:${helpNumber}`} style={{ color: '#1a1a1a' }}>
                     <span
                       style={{
                         fontFamily: 'Inter, sans-serif',
@@ -254,7 +260,6 @@ export const Layout = ({
                         letterSpacing: '-0.14px',
                         margin: '0',
                         fontWeight: '600',
-                        color: '#1a1a1a',
                       }}
                     >
                       {helpNumber}
