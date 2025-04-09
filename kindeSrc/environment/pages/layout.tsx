@@ -26,7 +26,7 @@ export const Layout = ({
   props,
 }: LayoutProps): React.JSX.Element => {
   console.log('props', props);
-  const { logo, helpText, helpNumber, paymentLogos } = props ?? {};
+  const { logo, helpText, helpNumber } = props ?? {};
   return (
     <html lang={request.locale.lang}>
       <head>
@@ -186,7 +186,7 @@ export const Layout = ({
         <header>
           <div className='header-container'>
             <div className='header-content'>
-              <a href='https://kwss-kitchenwarehouse.frontend.site/'>
+              <a href='https://kwh-kitchenwarehouse.netlify.app/'>
                 <div className='logo-wrapper'>
                   <picture>
                     <source
@@ -218,7 +218,7 @@ export const Layout = ({
           <div
             style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}
           >
-            need help
+            {/* need help */}
             <div
               style={{
                 display: 'flex',
@@ -231,10 +231,12 @@ export const Layout = ({
               {helpText && (
                 <span
                   style={{
+                    fontFamily: 'Inter, sans-serif',
                     fontSize: '0.875rem',
                     lineHeight: '1.25rem',
                     letterSpacing: '-0.14px',
                     margin: '0',
+                    color: '#1a1a1a',
                   }}
                 >
                   {helpText}
@@ -245,11 +247,13 @@ export const Layout = ({
                   <a href={`tel:${helpNumber}`}>
                     <span
                       style={{
+                        fontFamily: 'Inter, sans-serif',
                         fontSize: '0.875rem',
                         lineHeight: '1.25rem',
                         letterSpacing: '-0.14px',
                         margin: '0',
                         fontWeight: '600',
+                        color: '#1a1a1a',
                       }}
                     >
                       {helpNumber}
@@ -267,10 +271,12 @@ export const Layout = ({
             >
               <span
                 style={{
+                  fontFamily: 'Inter, sans-serif',
                   fontSize: '0.875rem',
                   lineHeight: '1.25rem',
                   letterSpacing: '-0.14px',
                   margin: '0',
+                  color: '#1a1a1a',
                 }}
               >
                 Your customer reference #:
@@ -281,13 +287,12 @@ export const Layout = ({
                   lineHeight: '1.25rem',
                   letterSpacing: '-0.14px',
                   margin: '0',
+                  color: '#1a1a1a',
                 }}
-              >
-                #
-              </span>
+              ></span>
             </div>
             {/* logos */}
-            <div>
+            {/* <div>
               <div
                 style={{
                   display: 'flex',
@@ -315,7 +320,7 @@ export const Layout = ({
                   }
                 )}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </footer>

@@ -30,7 +30,7 @@ const DefaultPage: React.FC<KindePageEvent> = async ({ context, request }) => {
         <main className='login-form-wrapper'>
           <div className='login-form'>
             {/* <a
-              href='https://kwss-kitchenwarehouse.frontend.site/'
+              href='https://kwh-kitchenwarehouse.netlify.app/'
               className='back-to-site'
             >
               <svg
