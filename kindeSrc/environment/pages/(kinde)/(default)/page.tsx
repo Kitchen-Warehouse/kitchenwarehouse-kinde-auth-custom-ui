@@ -4,6 +4,7 @@ import {
   getDarkModeLogoUrl,
   getKindeWidget,
   getLogoUrl,
+  fetch,
   type KindePageEvent,
 } from '@kinde/infrastructure';
 import React from 'react';
@@ -11,7 +12,12 @@ import React from 'react';
 import { renderToString } from 'react-dom/server.browser';
 import Layout from '../../layout';
 
-const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
+const DefaultPage: React.FC<KindePageEvent> = async({ context, request }) => {
+  const res = await fetch('https://cdn.builder.io/api/v3/content/login-page-data?apiKey=6c476b9f79974e74ace7fa278e8bc666', {
+    headers: {},
+    method: 'GET',
+  })
+  console.log('res',res)
   return (
     <Layout context={context} request={request}>
       <div className='container'>
