@@ -12,8 +12,6 @@ import { renderToString } from 'react-dom/server.browser';
 import Layout from '../../layout';
 
 const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
-  console.log('context', context);
-  console.log('request', request);
   return (
     <Layout context={context} request={request}>
       <div className='container'>

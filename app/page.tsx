@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className='flex items-center justify-center gap-10 h-screen flex-col w-full max-w-96 mx-auto'>
       {!isAuthenticated && (
-        <LoginLink authUrlParams={{utm_source: "reddit"}} className='m-0 flex h-14 w-full items-center justify-center rounded bg-crRed px-4 py-3 text-center font-bold uppercase text-white bg-red-500 hover:opacity-100 disabled:cursor-not-allowed disabled:border-gray-300 disabled:bg-gray-300 disabled:opacity-100'>
+        <LoginLink className='m-0 flex h-14 w-full items-center justify-center rounded bg-crRed px-4 py-3 text-center font-bold uppercase text-white bg-red-500 hover:opacity-100 disabled:cursor-not-allowed disabled:border-gray-300 disabled:bg-gray-300 disabled:opacity-100'>
           Login
         </LoginLink>
       )}
