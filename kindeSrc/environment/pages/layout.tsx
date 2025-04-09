@@ -56,7 +56,7 @@ export const Layout = ({
             display: flex;
             width: 100%;
             justify-content: space-between;
-            align-items:center
+            align-items:center;
             padding: 0.5rem 0;
             @media screen and (max-width: 1023px) {
               padding: 0.25rem 0;
