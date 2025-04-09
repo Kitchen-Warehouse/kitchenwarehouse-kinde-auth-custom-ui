@@ -22,6 +22,7 @@ const DefaultPage: React.FC<KindePageEvent> = async({ context, request }) => {
     <Layout context={context} request={request}>
       <div className='container'>
         <main className='login-form-wrapper'>
+          <p>{res}</p>
           <div className='login-form'>
             <a
               href='https://kwh-kitchenwarehouse.netlify.app/'
