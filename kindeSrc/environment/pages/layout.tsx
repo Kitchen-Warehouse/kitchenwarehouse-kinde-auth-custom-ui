@@ -175,7 +175,7 @@ export const Layout = ({
               }
               .side-panel-image {
                 width: 100%;
-                height: 75vh;
+                height: calc(100vh - 224px);
                 object-fit: cover;
               }
             }
@@ -214,7 +214,8 @@ export const Layout = ({
       </body>
       <footer>
         <div style={{ paddingBottom: '2.5rem' }}>
-          <div style={{ border: '0 solid #e6e6e6', width: '100%' }} />
+          {/* separator */}
+          <div style={{ borderTop: '1px solid #e6e6e6', width: '100%', marginTop: '1.5rem' }} />
           <div
             style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}
           >
