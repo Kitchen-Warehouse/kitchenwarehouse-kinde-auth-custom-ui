@@ -70,6 +70,7 @@ export const Layout = ({
               @media screen and (max-width: 1023px) {
                 flex-direction: column;
                 padding: 20px;
+                height: calc(100vh - 232px);
               }
             }
 
