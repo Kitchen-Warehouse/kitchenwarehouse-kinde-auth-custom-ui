@@ -88,10 +88,6 @@ export const Layout = ({
               gap: 120px;
               justify-content: center;
               flex: 1 0 0;
-              padding: 176px 0px;
-              @media screen and (max-width: 1023px) {
-                padding: 48px 0;
-              }
             }
 
             .login-form {
