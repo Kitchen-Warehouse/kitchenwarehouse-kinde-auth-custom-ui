@@ -40,19 +40,10 @@ export const Layout = ({
         <style nonce={getKindeNonce()}>
           {`
             .header-container {
-              padding-left: 1.25rem;
-              padding-right: 1.25rem;
-              z-index: 300;
-              padding-top: 1rem;
-              padding-bottom: 0.5rem;
-              margin-left: 0;
-              margin-right: 0;
-              margin-bottom: 1.5rem;
+              padding: 1rem 2rem;
             }
 
             .header-content{
-              margin: 0 auto;
-              max-width: 1200px;
               display: flex;
               width: 100%;
               justify-content: space-between;
@@ -81,6 +72,7 @@ export const Layout = ({
 
             .content-container {
               display:flex;
+              margin: 0 auto;
               flex: 1 0 0;
             }
 
@@ -88,6 +80,7 @@ export const Layout = ({
               display: flex;
               width: 100%;
               justify-content: center;
+              gap: 3rem;
               @media screen and (max-width: 1275px) {
                 flex-direction: column;
                 padding: 20px;
@@ -199,7 +192,7 @@ export const Layout = ({
               }
               .side-panel-image {
                 width: 100%;
-                height: calc(100vh - 249px);
+                height: calc(100vh - 233px);
                 object-fit: cover;
               }
             }
