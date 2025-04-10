@@ -15,7 +15,7 @@ interface LayoutProps extends KindePageEvent {
     logo?: string;
     helpText?: string;
     helpNumber?: string;
-    paymentLogos?: { name: string; image: string }[];
+    paymentLogos?: { name: string; paymentImageUrl: string }[];
   };
 }
 
@@ -351,21 +351,24 @@ export const Layout = ({
                   }}
                 >
                   {paymentLogos?.map(
-                    (logo: { name: string; image: string }, index: number) => {
+                    (
+                      logo: { name: string; paymentImageUrl: string },
+                      index: number
+                    ) => {
                       return (
-                        logo?.image && (
+                        logo?.paymentImageUrl && (
                           <div key={index}>
                             <picture>
                               <source
                                 media='(prefers-color-scheme: dark)'
-                                srcSet={logo.image}
+                                srcSet={logo.paymentImageUrl}
                               />
                               <img
                                 alt={logo.name}
                                 loading='lazy'
                                 width='37'
                                 height='23'
-                                src={logo.image}
+                                src={logo.paymentImageUrl}
                               />
                             </picture>
                           </div>
