@@ -26,7 +26,7 @@ export const Layout = ({
   props,
 }: LayoutProps): React.JSX.Element => {
   console.log('props', props);
-  const { logo, helpText, helpNumber } = props ?? {};
+  const { logo, helpText, helpNumber, paymentLogos } = props ?? {};
   return (
     <html lang={request.locale.lang}>
       <head>
@@ -299,7 +299,7 @@ export const Layout = ({
               ></span>
             </div>
             {/* logos */}
-            {/* <div>
+            <div>
               <div
                 style={{
                   display: 'flex',
@@ -327,7 +327,7 @@ export const Layout = ({
                   }
                 )}
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </footer>
