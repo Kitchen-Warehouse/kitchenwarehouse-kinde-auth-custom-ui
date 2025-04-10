@@ -58,7 +58,7 @@ export const Layout = ({
               justify-content: space-between;
               align-items:center;
               padding: 0.5rem 0;
-              @media screen and (max-width: 1023px) {
+              @media screen and (max-width: 1275px) {
                 padding: 0.25rem 0;
               }
             }
@@ -88,7 +88,7 @@ export const Layout = ({
               display: flex;
               width: 100%;
               justify-content: center;
-              @media screen and (max-width: 1023px) {
+              @media screen and (max-width: 1275px) {
                 flex-direction: column;
                 padding: 20px;
               }
@@ -193,7 +193,7 @@ export const Layout = ({
 
             .side-panel {
               flex: 1 0 0;
-                @media screen and (max-width: 1023px) {
+                @media screen and (max-width: 1275px) {
                     display: none;
                 }
               }

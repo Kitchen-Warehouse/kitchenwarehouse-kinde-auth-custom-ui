@@ -34,7 +34,7 @@ const DefaultPage: React.FC<KindePageEvent> = async ({ context, request }) => {
       props={res?.data?.results?.[0]?.data}
     >
       <div className='container'>
-        <main className='login-form-wrapper'>
+        <div className='login-form-wrapper'>
           {signInFormTextTop && isUserOnLoginOrRegisterPage === 'login' && (
             <div
               className='signInFormTextTopText'
@@ -67,20 +67,14 @@ const DefaultPage: React.FC<KindePageEvent> = async ({ context, request }) => {
                 dangerouslySetInnerHTML={{ __html: `${signupFormTextBottom}` }}
               />
             )}
-        </main>
+        </div>
         {loginPageImage && (
           <div className='side-panel'>
-            <picture>
-              <source
-                media='(prefers-color-scheme: dark)'
-                srcSet={loginPageImage}
-              />
-              <img
-                className='side-panel-image'
-                src={loginPageImage}
-                alt='image'
-              />
-            </picture>
+            <img
+              className='side-panel-image'
+              src={loginPageImage}
+              alt='image'
+            />
           </div>
         )}
       </div>
