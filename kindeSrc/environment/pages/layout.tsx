@@ -26,7 +26,6 @@ export const Layout = ({
   props,
 }: LayoutProps): React.JSX.Element => {
   const { logo, helpText, helpNumber, paymentLogos } = props ?? {};
-
   return (
     <html lang={request.locale.lang}>
       <head>
@@ -73,16 +72,18 @@ export const Layout = ({
             .content-container {
               display:flex;
               margin: 0 auto;
+              max-width: 1440px;
               flex: 1 0 0;
             }
 
             .container {
-              display: flex;
+              display: grid;
+              grid-template-columns: repeat(2, minmax(0, 1fr));
               width: 100%;
               justify-content: center;
               gap: 3rem;
               @media screen and (max-width: 1275px) {
-                flex-direction: column;
+                grid-template-columns: repeat(1, minmax(0, 1fr));
                 padding: 20px;
               }
             }
@@ -99,7 +100,7 @@ export const Layout = ({
               display: flex;
               flex-direction: column;
               width: 100%;
-              gap: 60px;
+              gap: 20px;
               justify-content: center;
               align-items: center;
               flex: 1 0 0;
@@ -192,7 +193,7 @@ export const Layout = ({
               }
               .side-panel-image {
                 width: 100%;
-                height: calc(100vh - 233px);
+                height: 100%;
                 object-fit: cover;
               }
             }
