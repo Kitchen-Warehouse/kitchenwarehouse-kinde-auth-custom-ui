@@ -109,6 +109,211 @@ export const Layout = ({
             .signInFormTextTopText, .signupFormTextTopText, .signInFormTextBottomText, .signupFormTextBottom {
                 color: #1A1A1A;
                 font-family: Inter, sans-serif;
+                hr {
+                  margin: 20px 0;
+                  border-color: var(--color-divider-border);
+                }
+
+                &.space-y {
+                  ul > li {
+                    margin-top: 16px;
+                  }
+                }
+
+                a {
+                  text-decoration: underline;
+                }
+
+                h4,
+                h5,
+                h6,
+                p,
+                div,
+                ul,
+                blockquote {
+                  margin-top: 16px;
+                }
+
+                h1,
+                h2 {
+                  margin-top: 56px;
+                }
+
+                h1:first-child,
+                h2:first-child,
+                h3:first-child,
+                h4:first-child,
+                h5:first-child,
+                h6:first-child,
+                p:first-child,
+                div:first-child,
+                ul:first-child,
+                blockquote:first-child,
+                a:first-child {
+                  margin-top: 0;
+                }
+
+                h1, h1 a {
+                  font-family: var(--typography-display-lg-mobile-font-family);
+                  font-size: var(--typography-display-lg-mobile-font-size);
+                  font-style: var(--typography-display-lg-mobile-font-style);
+                  font-weight: var(--typography-display-lg-mobile-font-weight);
+                  line-height: var(--typography-display-lg-mobile-line-height);
+                  letter-spacing: var(--typography-display-lg-mobile-letter-spacing);
+                  font-variation-settings: var(--typography-display-lg-mobile-font-variation-settings);
+                }
+
+                h2, h2 a {
+                  font-family: var(--typography-display-md-mobile-font-family);
+                  font-size: var(--typography-display-md-mobile-font-size);
+                  font-style: var(--typography-display-md-mobile-font-style);
+                  font-weight: var(--typography-display-md-mobile-font-weight);
+                  line-height: var(--typography-display-md-mobile-line-height);
+                  letter-spacing: var(--typography-display-md-mobile-letter-spacing);
+                  font-variation-settings: var(--typography-display-md-mobile-font-variation-settings);
+                }
+
+                h3, h3 a {
+                  margin-top: 32px;
+
+                  font-family: var(--typography-display-sm-mobile-font-family);
+                  font-size: var(--typography-display-sm-mobile-font-size);
+                  font-style: var(--typography-display-sm-mobile-font-style);
+                  font-weight: var(--typography-display-sm-mobile-font-weight);
+                  line-height: var(--typography-display-sm-mobile-line-height);
+                  letter-spacing: var(--typography-display-sm-mobile-letter-spacing);
+                  font-variation-settings: var(--typography-display-sm-mobile-font-variation-settings);
+                }
+
+                h4, h4 a,
+                h5, h5 a,
+                h6, h6 a {
+                  font-family: var(--typography-display-xs-mobile-font-family);
+                  font-size: var(--typography-display-xs-mobile-font-size);
+                  font-style: var(--typography-display-xs-mobile-font-style);
+                  font-weight: var(--typography-display-xs-mobile-font-weight);
+                  line-height: var(--typography-display-xs-mobile-line-height);
+                  letter-spacing: var(--typography-display-xs-mobile-letter-spacing);
+                  font-variation-settings: var(--typography-display-xs-mobile-font-variation-settings);
+                }
+
+                p,
+                ol,
+                ul,
+                li,
+                a {
+                  font-family: var(--typography-body-md-mobile-font-family);
+                  font-size: var(--typography-body-md-mobile-font-size);
+                  font-style: var(--typography-body-md-mobile-font-style);
+                  line-height: var(--typography-body-md-mobile-line-height);
+                  letter-spacing: var(--typography-body-md-mobile-letter-spacing);
+                  font-weight: var(--typography-body-md-mobile-font-weight);
+                  font-variation-settings: var(--typography-body-md-mobile-font-variation-settings);
+                }
+
+                ol {
+                  list-style-type: decimal;
+                }
+
+                ul {
+                  list-style-type: disc;
+                }
+
+                ol,
+                ul {
+                  margin-left: 20px;
+                }
+
+                strong {
+                  font-weight: var(--typography-semibold-mobile-font-weight);
+                  font-variation-settings: var(--typography-semibold-mobile-font-variation-settings);
+                }
+
+                blockquote {
+                  border-left: 2px solid var(--color-base-brand);
+                  padding-left: 20px;
+
+                  font-family: var(--typography-body-xl-mobile-font-family);
+                  font-size: var(--typography-body-xl-mobile-font-size);
+                  font-style: italic;
+                  line-height: var(--typography-body-xl-mobile-line-height);
+                  letter-spacing: var(--typography-body-xl-mobile-letter-spacing);
+                  font-weight: var(--typography-semibold-mobile-font-weight);
+                  font-variation-settings: var(--typography-semibold-mobile-font-variation-settings);
+                }
+
+                @media screen and (min-width: 1024px) {
+                  h1, h1 a {
+                    font-family: var(--typography-display-lg-font-family);
+                    font-size: var(--typography-display-lg-font-size);
+                    font-style: var(--typography-display-lg-font-style);
+                    font-weight: var(--typography-display-lg-font-weight);
+                    line-height: var(--typography-display-lg-line-height);
+                    letter-spacing: var(--typography-display-lg-letter-spacing);
+                    font-variation-settings: var(--typography-display-lg-font-variation-settings);
+                  }
+
+                  h2, h2 a {
+                    font-family: var(--typography-display-md-font-family);
+                    font-size: var(--typography-display-md-font-size);
+                    font-style: var(--typography-display-md-font-style);
+                    font-weight: var(--typography-display-md-font-weight);
+                    line-height: var(--typography-display-md-line-height);
+                    letter-spacing: var(--typography-display-md-letter-spacing);
+                    font-variation-settings: var(--typography-display-md-font-variation-settings);
+                  }
+
+                  h3, h3 a {
+                    font-family: var(--typography-display-sm-font-family);
+                    font-size: var(--typography-display-sm-font-size);
+                    font-style: var(--typography-display-sm-font-style);
+                    font-weight: var(--typography-display-sm-font-weight);
+                    line-height: var(--typography-display-sm-line-height);
+                    letter-spacing: var(--typography-display-sm-letter-spacing);
+                    font-variation-settings: var(--typography-display-sm-font-variation-settings);
+                  }
+
+                  h4, h4 a,
+                  h5, h5 a,
+                  h6, h6 a {
+                    font-family: var(--typography-display-xs-font-family);
+                    font-size: var(--typography-display-xs-font-size);
+                    font-style: var(--typography-display-xs-font-style);
+                    font-weight: var(--typography-display-xs-font-weight);
+                    line-height: var(--typography-display-xs-line-height);
+                    letter-spacing: var(--typography-display-xs-letter-spacing);
+                    font-variation-settings: var(--typography-display-xs-font-variation-settings);
+                  }
+
+                  p,
+                  ol,
+                  ul,
+                  li,
+                  a {
+                    font-family: var(--typography-body-md-font-family);
+                    font-size: var(--typography-body-md-font-size);
+                    font-style: var(--typography-body-md-font-style);
+                    line-height: var(--typography-body-md-line-height);
+                    letter-spacing: var(--typography-body-md-letter-spacing);
+                    font-weight: var(--typography-body-md-font-weight);
+                    font-variation-settings: var(--typography-body-md-font-variation-settings);
+                  }
+
+                  strong {
+                    font-weight: var(--typography-semibold-font-weight);
+                    font-variation-settings: var(--typography-semibold-font-variation-settings);
+                  }
+
+                  blockquote {
+                    font-family: var(--typography-body-xl-font-family);
+                    font-size: var(--typography-body-xl-font-size);
+                    font-style: italic;
+                    line-height: var(--typography-body-xl-line-height);
+                    letter-spacing: var(--typography-body-xl-letter-spacing);
+                    font-weight: var(--typography-semibold-font-weight);
+                    font-variation-settings: var(--typography-semibold-font-variation-settings);
+                  }
+                }
             }
 
             .login-form {
@@ -230,14 +435,14 @@ export const Layout = ({
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
                     viewBox='0 0 24 24'
-                    stroke-width='1.5'
+                    strokeWidth='1.5'
                   >
                     <path
                       d='M16.5 10.5V6.75C16.5 4.26472 14.4853 2.25 12 2.25C9.51472 2.25 7.5 4.26472 7.5 6.75V10.5M6.75 21.75H17.25C18.4926 21.75 19.5 20.7426 19.5 19.5V12.75C19.5 11.5074 18.4926 10.5 17.25 10.5H6.75C5.50736 10.5 4.5 11.5074 4.5 12.75V19.5C4.5 20.7426 5.50736 21.75 6.75 21.75Z'
                       stroke='currentColor'
-                      stroke-width='1.5'
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
+                      strokeWidth='1.5'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
                     ></path>
                   </svg>
                 </div>
