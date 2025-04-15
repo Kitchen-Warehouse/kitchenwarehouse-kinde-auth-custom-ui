@@ -161,7 +161,7 @@ export const Layout = ({
                 font-weight: 600;
                 line-height: 1.9375rem;
                 letter-spacing: -0.9px;
-                font-variation-settings: 'wght' 600, 'opsz' 32;
+                font-variation-settings: \"wght\" 600, \"opsz\" 32;
               }
 
               h2, h2 a {
@@ -170,7 +170,7 @@ export const Layout = ({
                 font-weight: 600;
                 line-height: 2.625rem;
                 letter-spacing: -0.28px;
-                font-variation-settings: 'wght' 600, 'opsz' 32;
+                font-variation-settings: \"wght\" 600, \"opsz\" 32;
               }
 
               h3, h3 a {
@@ -180,7 +180,7 @@ export const Layout = ({
                 font-weight: 600;
                 line-height: 1.5625rem;
                 letter-spacing: -0.24px;
-                font-variation-settings: 'wght' 600, 'opsz' 24;
+                font-variation-settings: \"wght\" 600, \"opsz\" 24;
               }
 
               h4, h4 a,
@@ -191,7 +191,7 @@ export const Layout = ({
                 font-weight: 600;
                 line-height: 1.25rem;
                 letter-spacing: -0.4px;
-                font-variation-settings: 'wght' 600, 'opsz' 20;
+                font-variation-settings: \"wght\" 600, \"opsz\" 20;
               }
 
               p,
@@ -204,7 +204,7 @@ export const Layout = ({
                 font-weight: 400;
                 line-height: 1.5rem;
                 letter-spacing: -0.14px;
-                font-variation-settings: 'wght' 400, 'opsz' 14;
+                font-variation-settings: \"wght\" 400, \"opsz\" 14;
               }
 
               ol {
@@ -222,7 +222,7 @@ export const Layout = ({
 
               strong {
                 font-weight: 600;
-                font-variation-settings: 'wght' 600, 'opsz' 16;
+                font-variation-settings: \"wght\" 600, \"opsz\" 16;
               }
 
               blockquote {
@@ -234,7 +234,7 @@ export const Layout = ({
                 font-weight: 400;
                 line-height: 1.875rem;
                 letter-spacing: -0.36px;
-                font-variation-settings: 'wght' 400, 'opsz' 18;
+                font-variation-settings: \"wght\" 400, \"opsz\" 18;
               }
 
               @media screen and (min-width: 1024px) {
@@ -244,7 +244,7 @@ export const Layout = ({
                 font-weight: 600;
                 line-height: 3.75rem;
                 letter-spacing: -1.44px;
-                font-variation-settings: 'wght' 600, 'opsz' 32;
+                font-variation-settings: \"wght\" 600, \"opsz\" 32;
               }
 
               h2, h2 a {
@@ -253,7 +253,7 @@ export const Layout = ({
                 font-weight: 600;
                 line-height: 2.75rem;
                 letter-spacing: -0.36px;
-                font-variation-settings: 'wght' 600, 'opsz' 32;
+                font-variation-settings: \"wght\" 600, \"opsz\" 32;
               }
 
               h3, h3 a {
@@ -262,7 +262,7 @@ export const Layout = ({
                 font-weight: 600;
                 line-height: 2.375rem;
                 letter-spacing: -0.3px;
-                font-variation-settings: 'wght' 600, 'opsz' 30;
+                font-variation-settings: \"wght\" 600, \"opsz\" 30;
               }
 
               h4, h4 a,
@@ -273,7 +273,7 @@ export const Layout = ({
                 font-weight: 600;
                 line-height: 2rem;
                 letter-spacing: -0.48px;
-                font-variation-settings: 'wght' 600, 'opsz' 24;
+                font-variation-settings: \"wght\" 600, \"opsz\" 24;
               }
 
               p,
@@ -286,12 +286,12 @@ export const Layout = ({
                 font-weight: 400;
                 line-height: 1.5rem;
                 letter-spacing:  -0.16px;
-                font-variation-settings: 'wght' 400, 'opsz' 16;
+                font-variation-settings: \"wght\" 400, \"opsz\" 16;
               }
 
               strong {
                 font-weight: 600;
-                font-variation-settings: 'wght' 600, 'opsz' 18;
+                font-variation-settings: \"wght\" 600, \"opsz\" 18;
               }
 
               blockquote {
@@ -301,7 +301,7 @@ export const Layout = ({
                 line-height: 1.875rem;
                 letter-spacing: -0.4px;
                 font-weight: 400;
-                font-variation-settings: 'wght' 400, 'opsz' 20;
+                font-variation-settings: \"wght\" 400, \"opsz\" 20;
                   }
                 }
                 }
