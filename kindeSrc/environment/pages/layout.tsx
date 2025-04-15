@@ -49,7 +49,7 @@ export const Layout = ({
               align-items:center;
               padding: 0.5rem 0;
               @media screen and (max-width: 1275px) {
-                padding: 0.25rem 0;
+              padding: 0.25rem 0;
               }
             }
 
@@ -84,10 +84,9 @@ export const Layout = ({
               justify-content: center;
               gap: 3rem;
               align-items: center;
-              height: fit-content;
               @media screen and (max-width: 1275px) {
-                grid-template-columns: repeat(1, minmax(0, 1fr));
-                padding: 20px;
+              grid-template-columns: repeat(1, minmax(0, 1fr));
+              padding: 20px;
               }
             }
 
@@ -110,214 +109,202 @@ export const Layout = ({
             }
 
             .signInFormTextTopText, .signupFormTextTopText, .signInFormTextBottomText, .signupFormTextBottom {
-                color: #1A1A1A;
-                font-family: Inter, sans-serif;
-                hr {
-                  margin: 20px 0;
-                  border-color: var(--color-divider-border);
-                }
+              color: #1A1A1A;
+              font-family: Inter, sans-serif;
+              hr {
+                margin: 20px 0;
+                border-color: #e6e6e6;
+              }
 
-                &.space-y {
-                  ul > li {
-                    margin-top: 16px;
-                  }
+              &.space-y {
+                ul > li {
+                margin-top: 16px;
                 }
+              }
 
-                a {
-                  text-decoration: underline;
-                }
+              a {
+                text-decoration: underline;
+              }
 
-                h4,
-                h5,
-                h6,
-                p,
-                div,
-                ul,
-                blockquote {
-                  margin-top: 16px;
-                }
+              h4,
+              h5,
+              h6,
+              p,
+              div,
+              ul,
+              blockquote {
+                margin-top: 16px;
+              }
 
-                h1,
-                h2 {
-                  margin-top: 56px;
-                }
+              h1,
+              h2 {
+                margin-top: 56px;
+              }
 
-                h1:first-child,
-                h2:first-child,
-                h3:first-child,
-                h4:first-child,
-                h5:first-child,
-                h6:first-child,
-                p:first-child,
-                div:first-child,
-                ul:first-child,
-                blockquote:first-child,
-                a:first-child {
-                  margin-top: 0;
-                }
+              h1:first-child,
+              h2:first-child,
+              h3:first-child,
+              h4:first-child,
+              h5:first-child,
+              h6:first-child,
+              p:first-child,
+              div:first-child,
+              ul:first-child,
+              blockquote:first-child,
+              a:first-child {
+                margin-top: 0;
+              }
 
+              h1, h1 a {
+                font-family: Inter, system-ui, sans-serif;
+                font-size: 1.875rem;
+                font-weight: 600;
+                line-height: 1.9375rem;
+                letter-spacing: -0.9px;
+                font-variation-settings: \'wght\' 600, \'opsz\' 32;
+              }
+
+              h2, h2 a {
+                font-family: Inter, system-ui, sans-serif;
+                font-size: 1.75rem;
+                font-weight: 600;
+                line-height: 2.625rem;
+                letter-spacing: -0.28px;
+                font-variation-settings: \'wght\' 600, \'opsz\' 32;
+              }
+
+              h3, h3 a {
+                margin-top: 32px;
+                font-family: Inter, system-ui, sans-serif;
+                font-size: 1.5rem;
+                font-weight: 600;
+                line-height: 1.5625rem;
+                letter-spacing: -0.24px;
+                font-variation-settings: \'wght\' 600, \'opsz\' 24;
+              }
+
+              h4, h4 a,
+              h5, h5 a,
+              h6, h6 a {
+                font-family: Inter, system-ui, sans-serif;
+                font-size: 1.25rem;
+                font-weight: 600;
+                line-height: 1.25rem;
+                letter-spacing: -0.4px;
+                font-variation-settings: \'wght\' 600, \'opsz\' 20;
+              }
+
+              p,
+              ol,
+              ul,
+              li,
+              a {
+                font-family: Inter, system-ui, sans-serif;
+                font-size: 0.875rem;
+                font-weight: 400;
+                line-height: 1.5rem;
+                letter-spacing: -0.14px;
+                font-variation-settings: \'wght\' 400, \'opsz\' 14;
+              }
+
+              ol {
+                list-style-type: decimal;
+              }
+
+              ul {
+                list-style-type: disc;
+              }
+
+              ol,
+              ul {
+                margin-left: 20px;
+              }
+
+              strong {
+                font-weight: 600;
+                font-variation-settings: \'wght\' 600, \'opsz\' 16;
+              }
+
+              blockquote {
+                border-left: 2px solid #ff3f33;
+                padding-left: 20px;
+                font-family: Inter, system-ui, sans-serif;
+                font-size: 1.125rem;
+                font-style: italic;
+                font-weight: 400;
+                line-height: 1.875rem;
+                letter-spacing: -0.36px;
+                font-variation-settings: \'wght\' 400, \'opsz\' 18;
+              }
+
+              @media screen and (min-width: 1024px) {
                 h1, h1 a {
-                  font-family: var(--typography-display-lg-mobile-font-family);
-                  font-size: var(--typography-display-lg-mobile-font-size);
-                  font-style: var(--typography-display-lg-mobile-font-style);
-                  font-weight: var(--typography-display-lg-mobile-font-weight);
-                  line-height: var(--typography-display-lg-mobile-line-height);
-                  letter-spacing: var(--typography-display-lg-mobile-letter-spacing);
-                  font-variation-settings: var(--typography-display-lg-mobile-font-variation-settings);
-                }
+                font-family: Inter, system-ui, sans-serif;
+                font-size: 3rem;
+                font-weight: 600;
+                line-height: 3.75rem;
+                letter-spacing: -1.44px;
+                font-variation-settings: \'wght\' 600, \'opsz\' 32;
+              }
 
-                h2, h2 a {
-                  font-family: var(--typography-display-md-mobile-font-family);
-                  font-size: var(--typography-display-md-mobile-font-size);
-                  font-style: var(--typography-display-md-mobile-font-style);
-                  font-weight: var(--typography-display-md-mobile-font-weight);
-                  line-height: var(--typography-display-md-mobile-line-height);
-                  letter-spacing: var(--typography-display-md-mobile-letter-spacing);
-                  font-variation-settings: var(--typography-display-md-mobile-font-variation-settings);
-                }
+              h2, h2 a {
+                font-family: Inter, system-ui, sans-serif;
+                font-size: 2.25rem;
+                font-weight: 600;
+                line-height: 2.75rem;
+                letter-spacing: -0.36px;
+                font-variation-settings: \'wght\' 600, \'opsz\' 32;
+              }
 
-                h3, h3 a {
-                  margin-top: 32px;
+              h3, h3 a {
+                font-family: Inter, system-ui, sans-serif;
+                font-size: 1.875rem;
+                font-weight: 600;
+                line-height: 2.375rem;
+                letter-spacing: -0.3px;
+                font-variation-settings: \'wght\' 600, \'opsz\' 30;
+              }
 
-                  font-family: var(--typography-display-sm-mobile-font-family);
-                  font-size: var(--typography-display-sm-mobile-font-size);
-                  font-style: var(--typography-display-sm-mobile-font-style);
-                  font-weight: var(--typography-display-sm-mobile-font-weight);
-                  line-height: var(--typography-display-sm-mobile-line-height);
-                  letter-spacing: var(--typography-display-sm-mobile-letter-spacing);
-                  font-variation-settings: var(--typography-display-sm-mobile-font-variation-settings);
-                }
+              h4, h4 a,
+              h5, h5 a,
+              h6, h6 a {
+                font-family: Inter, system-ui, sans-serif;
+                font-size: 1.5rem;
+                font-weight: 600;
+                line-height: 2rem;
+                letter-spacing: -0.48px;
+                font-variation-settings: \'wght\' 600, \'opsz\' 24;
+              }
 
-                h4, h4 a,
-                h5, h5 a,
-                h6, h6 a {
-                  font-family: var(--typography-display-xs-mobile-font-family);
-                  font-size: var(--typography-display-xs-mobile-font-size);
-                  font-style: var(--typography-display-xs-mobile-font-style);
-                  font-weight: var(--typography-display-xs-mobile-font-weight);
-                  line-height: var(--typography-display-xs-mobile-line-height);
-                  letter-spacing: var(--typography-display-xs-mobile-letter-spacing);
-                  font-variation-settings: var(--typography-display-xs-mobile-font-variation-settings);
-                }
+              p,
+              ol,
+              ul,
+              li,
+              a {
+                font-family: Inter, system-ui, sans-serif;
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.5rem;
+                letter-spacing:  -0.16px;
+                font-variation-settings: \'wght\' 400, \'opsz\' 16;
+              }
 
-                p,
-                ol,
-                ul,
-                li,
-                a {
-                  font-family: var(--typography-body-md-mobile-font-family);
-                  font-size: var(--typography-body-md-mobile-font-size);
-                  font-style: var(--typography-body-md-mobile-font-style);
-                  line-height: var(--typography-body-md-mobile-line-height);
-                  letter-spacing: var(--typography-body-md-mobile-letter-spacing);
-                  font-weight: var(--typography-body-md-mobile-font-weight);
-                  font-variation-settings: var(--typography-body-md-mobile-font-variation-settings);
-                }
+              strong {
+                font-weight: 600;
+                font-variation-settings: \'wght\' 600, \'opsz\' 18;
+              }
 
-                ol {
-                  list-style-type: decimal;
-                }
-
-                ul {
-                  list-style-type: disc;
-                }
-
-                ol,
-                ul {
-                  margin-left: 20px;
-                }
-
-                strong {
-                  font-weight: var(--typography-semibold-mobile-font-weight);
-                  font-variation-settings: var(--typography-semibold-mobile-font-variation-settings);
-                }
-
-                blockquote {
-                  border-left: 2px solid var(--color-base-brand);
-                  padding-left: 20px;
-
-                  font-family: var(--typography-body-xl-mobile-font-family);
-                  font-size: var(--typography-body-xl-mobile-font-size);
-                  font-style: italic;
-                  line-height: var(--typography-body-xl-mobile-line-height);
-                  letter-spacing: var(--typography-body-xl-mobile-letter-spacing);
-                  font-weight: var(--typography-semibold-mobile-font-weight);
-                  font-variation-settings: var(--typography-semibold-mobile-font-variation-settings);
-                }
-
-                @media screen and (min-width: 1024px) {
-                  h1, h1 a {
-                    font-family: var(--typography-display-lg-font-family);
-                    font-size: var(--typography-display-lg-font-size);
-                    font-style: var(--typography-display-lg-font-style);
-                    font-weight: var(--typography-display-lg-font-weight);
-                    line-height: var(--typography-display-lg-line-height);
-                    letter-spacing: var(--typography-display-lg-letter-spacing);
-                    font-variation-settings: var(--typography-display-lg-font-variation-settings);
-                  }
-
-                  h2, h2 a {
-                    font-family: var(--typography-display-md-font-family);
-                    font-size: var(--typography-display-md-font-size);
-                    font-style: var(--typography-display-md-font-style);
-                    font-weight: var(--typography-display-md-font-weight);
-                    line-height: var(--typography-display-md-line-height);
-                    letter-spacing: var(--typography-display-md-letter-spacing);
-                    font-variation-settings: var(--typography-display-md-font-variation-settings);
-                  }
-
-                  h3, h3 a {
-                    font-family: var(--typography-display-sm-font-family);
-                    font-size: var(--typography-display-sm-font-size);
-                    font-style: var(--typography-display-sm-font-style);
-                    font-weight: var(--typography-display-sm-font-weight);
-                    line-height: var(--typography-display-sm-line-height);
-                    letter-spacing: var(--typography-display-sm-letter-spacing);
-                    font-variation-settings: var(--typography-display-sm-font-variation-settings);
-                  }
-
-                  h4, h4 a,
-                  h5, h5 a,
-                  h6, h6 a {
-                    font-family: var(--typography-display-xs-font-family);
-                    font-size: var(--typography-display-xs-font-size);
-                    font-style: var(--typography-display-xs-font-style);
-                    font-weight: var(--typography-display-xs-font-weight);
-                    line-height: var(--typography-display-xs-line-height);
-                    letter-spacing: var(--typography-display-xs-letter-spacing);
-                    font-variation-settings: var(--typography-display-xs-font-variation-settings);
-                  }
-
-                  p,
-                  ol,
-                  ul,
-                  li,
-                  a {
-                    font-family: var(--typography-body-md-font-family);
-                    font-size: var(--typography-body-md-font-size);
-                    font-style: var(--typography-body-md-font-style);
-                    line-height: var(--typography-body-md-line-height);
-                    letter-spacing: var(--typography-body-md-letter-spacing);
-                    font-weight: var(--typography-body-md-font-weight);
-                    font-variation-settings: var(--typography-body-md-font-variation-settings);
-                  }
-
-                  strong {
-                    font-weight: var(--typography-semibold-font-weight);
-                    font-variation-settings: var(--typography-semibold-font-variation-settings);
-                  }
-
-                  blockquote {
-                    font-family: var(--typography-body-xl-font-family);
-                    font-size: var(--typography-body-xl-font-size);
-                    font-style: italic;
-                    line-height: var(--typography-body-xl-line-height);
-                    letter-spacing: var(--typography-body-xl-letter-spacing);
-                    font-weight: var(--typography-semibold-font-weight);
-                    font-variation-settings: var(--typography-semibold-font-variation-settings);
+              blockquote {
+                font-family: Inter, system-ui, sans-serif;
+                font-size: 1.25rem;
+                font-style: italic;
+                line-height: 1.875rem;
+                letter-spacing: -0.4px;
+                font-weight: 400;
+                font-variation-settings: \'wght\' 400, \'opsz\' 20;
                   }
                 }
-            }
+                }
 
             .login-form {
               display: flex;
@@ -394,21 +381,228 @@ export const Layout = ({
             }
 
             .side-panel {
-              flex: 1 0 0;
-                @media screen and (max-width: 1275px) {
-                    display: none;
-                }
+              display: flex;
+              height: 100%;
+              @media screen and (max-width: 1275px) {
+                display: none;
               }
               .side-panel-image {
                 width: 100%;
                 height: 100%;
-                max-height: 800px;
+                aspect-ratio: 1;
                 object-fit: cover;
                 border-radius: 4px;
               }
             }
-          `}
+
+            /* Loading Styles */
+            .auth-loading-overlay {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(255, 255, 255, 0.9);
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              z-index: 1000;
+              transition: opacity 0.3s;
+            }
+            
+            .auth-loading-hidden {
+              opacity: 0;
+              pointer-events: none;
+            }
+
+            /* Custom Spinner */
+            .custom-spinner {
+              display: inline-block;
+              width: 40px;
+              height: 40px;
+              border: 5px solid #161616;
+              border-radius: 50%;
+              border-top-color: transparent;
+              animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+              to {
+                transform: rotate(360deg);
+              }
+            }
+            `}
         </style>
+        <script
+          nonce={getKindeNonce()}
+          dangerouslySetInnerHTML={{
+            __html: `
+            // Create loading overlay
+            document.addEventListener('DOMContentLoaded', function() {
+              // Create loading elements
+              const loadingOverlay = document.createElement('div');
+              loadingOverlay.className = 'auth-loading-overlay';
+              loadingOverlay.id = 'kinde-auth-loader';
+              
+              const spinner = document.createElement('div');
+              spinner.className = 'custom-spinner';
+              
+              const loadingText = document.createElement('p');
+              loadingText.innerText = '';
+              loadingText.style.marginTop = '10px';
+              
+              // Add elements to DOM
+              loadingOverlay.appendChild(spinner);
+              loadingOverlay.appendChild(loadingText);
+              document.body.appendChild(loadingOverlay);
+              
+              // Show loader initially
+              loadingOverlay.classList.remove('auth-loading-hidden');
+              
+              // Hide loader when page is fully loaded
+              window.addEventListener('load', function() {
+                setTimeout(() => {
+                  loadingOverlay.classList.add('auth-loading-hidden');
+                }, 300);
+              });
+              
+              // Track navigation completion
+              let navigationTimeout;
+              
+              // Handle browser back/forward navigation
+              window.addEventListener('popstate', function() {
+                // Show loader during browser navigation events
+                loadingOverlay.classList.remove('auth-loading-hidden');
+                
+                // Clear any existing timeout
+                if (navigationTimeout) {
+                  clearTimeout(navigationTimeout);
+                }
+                
+                // Set a timeout to hide the loader
+                navigationTimeout = setTimeout(() => {
+                  loadingOverlay.classList.add('auth-loading-hidden');
+                }, 1500); // 1.5 seconds for browser navigation
+              });
+              
+              // Intercept history changes (pushState/replaceState)
+              const originalPushState = window.history.pushState;
+              const originalReplaceState = window.history.replaceState;
+              
+              window.history.pushState = function() {
+                originalPushState.apply(this, arguments);
+                // Show loader when history state changes
+                loadingOverlay.classList.remove('auth-loading-hidden');
+                
+                // Clear any existing timeout
+                if (navigationTimeout) {
+                  clearTimeout(navigationTimeout);
+                }
+                
+                // Set a timeout to hide the loader
+                navigationTimeout = setTimeout(() => {
+                  loadingOverlay.classList.add('auth-loading-hidden');
+                }, 1500);
+              };
+              
+              window.history.replaceState = function() {
+                originalReplaceState.apply(this, arguments);
+                // Show loader when history state changes
+                loadingOverlay.classList.remove('auth-loading-hidden');
+                
+                // Clear any existing timeout
+                if (navigationTimeout) {
+                  clearTimeout(navigationTimeout);
+                }
+                
+                // Set a timeout to hide the loader
+                navigationTimeout = setTimeout(() => {
+                  loadingOverlay.classList.add('auth-loading-hidden');
+                }, 1500);
+              };
+              
+              // Show loader on any link click within authentication pages
+              document.addEventListener('click', function(e) {
+                const closestLink = e.target.closest('a');
+                const closestButton = e.target.closest('button');
+                const isKindeTextLink = e.target.classList && (
+                  e.target.classList.contains('kinde-text-link') || 
+                  (e.target.parentElement && e.target.parentElement.classList.contains('kinde-text-link'))
+                );
+                const isPrimaryButton = e.target.classList && (
+                  e.target.classList.contains('kinde-button-variant-primary') ||
+                  (e.target.closest('.kinde-button-variant-primary'))
+                );
+                
+                if (isKindeTextLink || 
+                    (closestLink && closestLink.href) || 
+                    (closestButton && closestButton.type === 'submit') ||
+                    isPrimaryButton) {
+                  
+                  // Show loader
+                  loadingOverlay.classList.remove('auth-loading-hidden');
+                  
+                  // Clear any existing timeout
+                  if (navigationTimeout) {
+                    clearTimeout(navigationTimeout);
+                  }
+                  
+                  // Set timeout based on what was clicked
+                  // Use shorter timeout for text links, longer for buttons
+                  let timeoutDuration = 1000; // default 1 second for text links
+                  
+                  if (isPrimaryButton || (closestButton && closestButton.type === 'submit')) {
+                    timeoutDuration = 3000; // 3 seconds for primary buttons and submit buttons
+                  }
+                  
+                  // Set a backup timeout to hide the loader if navigation doesn't complete
+                  navigationTimeout = setTimeout(() => {
+                    loadingOverlay.classList.add('auth-loading-hidden');
+                  }, timeoutDuration);
+                }
+              });
+              
+              // Handle form submissions
+              document.addEventListener('submit', function(e) {
+                loadingOverlay.classList.remove('auth-loading-hidden');
+              });
+              
+              // Monitor for DOM changes that indicate page load completion
+              const observer = new MutationObserver(function(mutations) {
+                // Check if mutations indicate auth content has loaded
+                const kindeContentLoaded = mutations.some(mutation => {
+                  return mutation.addedNodes.length > 0 || 
+                         (mutation.target.classList && 
+                          mutation.target.classList.contains('kinde-button-variant-primary'));
+                });
+                
+                if (kindeContentLoaded) {
+                  setTimeout(() => {
+                    loadingOverlay.classList.add('auth-loading-hidden');
+                    if (navigationTimeout) {
+                      clearTimeout(navigationTimeout);
+                    }
+                  }, 300);
+                }
+              });
+              
+              // Start observing once DOM is loaded
+              setTimeout(() => {
+                const kindeRoot = document.querySelector('[data-kinde-root]');
+                if (kindeRoot) {
+                  observer.observe(kindeRoot, {
+                    childList: true,
+                    subtree: true,
+                    attributes: true,
+                    characterData: false
+                  });
+                }
+              }, 500);
+            });
+          `,
+          }}
+        />
       </head>
       <body style={{ display: 'flex', flexDirection: 'column' }}>
         {logo && (
