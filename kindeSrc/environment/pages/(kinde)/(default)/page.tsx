@@ -69,11 +69,13 @@ const DefaultPage: React.FC<KindePageEvent> = async ({ context, request }) => {
         </div>
         {loginPageImage && (
           <div className='side-panel'>
-            <img
-              className='side-panel-image'
-              src={loginPageImage}
-              alt='image'
-            />
+            <picture>
+              <img
+                className='side-panel-image'
+                src={loginPageImage}
+                alt='image'
+              />
+            </picture>
           </div>
         )}
       </div>

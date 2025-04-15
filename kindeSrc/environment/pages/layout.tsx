@@ -71,6 +71,7 @@ export const Layout = ({
 
             .content-container {
               display:flex;
+              align-items: center;
               margin: 0 auto;
               max-width: 1440px;
               flex: 1 0 0;
@@ -82,6 +83,8 @@ export const Layout = ({
               width: 100%;
               justify-content: center;
               gap: 3rem;
+              align-items: center;
+              height: fit-content;
               @media screen and (max-width: 1275px) {
                 grid-template-columns: repeat(1, minmax(0, 1fr));
                 padding: 20px;
@@ -399,7 +402,9 @@ export const Layout = ({
               .side-panel-image {
                 width: 100%;
                 height: 100%;
+                max-height: 800px;
                 object-fit: cover;
+                border-radius: 4px;
               }
             }
           `}
