@@ -643,7 +643,7 @@ export const Layout = ({
           <header>
             <div className='header-container'>
               <div className='header-content'>
-                <a href='https://kwh-kitchenwarehouse.netlify.app/'>
+                <a href='https://www.kitchenwarehouse.com.au/'>
                   <div className='logo-wrapper'>
                     <picture>
                       <source
