@@ -750,35 +750,6 @@ export const Layout = ({
                   </div>
                 )}
               </div>
-              {/* customer reference */}
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '0.875rem',
-                    lineHeight: '1.25rem',
-                    letterSpacing: '-0.14px',
-                    margin: '0',
-                    color: '#1a1a1a',
-                  }}
-                >
-                  Your customer reference #:
-                </span>
-                <span
-                  style={{
-                    fontSize: '0.875rem',
-                    lineHeight: '1.25rem',
-                    letterSpacing: '-0.14px',
-                    margin: '0',
-                    color: '#1a1a1a',
-                  }}
-                ></span>
-              </div>
               {/* logos */}
               <div>
                 <div
