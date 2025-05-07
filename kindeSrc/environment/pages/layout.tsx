@@ -5,6 +5,8 @@ import {
   getKindeNonce,
   getKindeRequiredCSS,
   getKindeRequiredJS,
+  getFallbackFaviconUrl,
+  getSVGFaviconUrl,
   type KindePageEvent,
 } from '@kinde/infrastructure';
 import React from 'react';
@@ -34,6 +36,8 @@ export const Layout = ({
         <meta name='robots' content='noindex' />
         <meta name='csrf-token' content={getKindeCSRF()} />
         <title>{context.widget.content.pageTitle}</title>
+        <link rel="icon" href={getFallbackFaviconUrl()} sizes="48x48" />
+        <link rel="icon" href={getSVGFaviconUrl()} type="image/svg+xml" />
         {getKindeRequiredCSS()}
         {getKindeRequiredJS()}
         <style nonce={getKindeNonce()}>
