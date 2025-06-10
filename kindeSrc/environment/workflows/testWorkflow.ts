@@ -4,6 +4,7 @@ import {
   fetch,
   onPostAuthenticationEvent,
 } from '@kinde/infrastructure';
+import axios from 'axios';
 
 export const workflowSettings = {
   id: 'postAuthentication',
@@ -55,8 +56,9 @@ const requestOptions = {
   redirect: "follow"
 };
 console.log({isNewKindeUser})
-    const M2MToken = await fetch(
+    const M2MToken = await axios.post(
       'https://auth-staging.kitchenwarehouse.com.au/oauth2/token',
+      urlencoded.toString(),
       requestOptions
     );
 console.log('M2MToken', M2MToken.data);
