@@ -47,7 +47,7 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
     const kindeAPI = await createKindeAPI(event);
 console.log({isNewKindeUser, kindeAPI})
   const { data } = await kindeAPI.post({
-      endpoint: `/oauth2/token`,
+      endpoint: `https://auth-staging.kitchenwarehouse.com.au/oauth2/token`,
     });
     console.log({data})
 //     const M2MToken = await fetch(
