@@ -49,6 +49,7 @@ const requestOptions = {
   method: "POST" as "POST" | "GET" | "PUT" | "DELETE" | "PATCH",
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
+    "Access-Control-Allow-Methods": "*"
   },
   body: urlencoded,
   redirect: "follow"
