@@ -19,9 +19,9 @@ export const workflowSettings = {
 };
 
 export default async function TestWorkflow(event: onPostAuthenticationEvent) {
-  const accessToken = accessTokenCustomClaims<{
-    customerId: string;
-  }>();
+//   const accessToken = accessTokenCustomClaims<{
+//     customerId: string;
+//   }>();
   console.log({event})
   const isNewKindeUser = event.context.auth.isNewUserRecordCreated;
   console.log({userId:  event.context.user,isNewKindeUser})
@@ -29,15 +29,15 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
   const userId = event.context.user.id
   body.append('userId', userId);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const response: any = await fetch(
-    'https://get-kwh-customer-by-email.netlify.app/get-user',
-    {
-      method: 'POST',
-      responseFormat: 'text',
-      headers: {},
-      body,
-    }
-  );
+//   const response: any = await fetch(
+//     'https://get-kwh-customer-by-email.netlify.app/get-user',
+//     {
+//       method: 'POST',
+//       responseFormat: 'text',
+//       headers: {},
+//       body,
+//     }
+//   );
 console.log({isNewKindeUser})
     const M2MToken = await fetch(
       'https://auth-staging.kitchenwarehouse.com.au/oauth2/token',
@@ -48,8 +48,8 @@ console.log({isNewKindeUser})
       }
     );
 console.log('M2MToken', M2MToken);
-  console.log('response', response?.data);
-  console.log({response})
+//   console.log('response', response?.data);
+//   console.log({response})
 
-  accessToken.customerId = response?.data;
+//   accessToken.customerId = response?.data;
 }
