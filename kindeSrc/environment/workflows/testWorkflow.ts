@@ -45,7 +45,7 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
         redirect: "follow"
     };
     const kindeAPI = await createKindeAPI(event);
-console.log({isNewKindeUser})
+console.log({isNewKindeUser, kindeAPI})
   const { data } = await kindeAPI.post({
       endpoint: `/oauth2/token`,
     });
