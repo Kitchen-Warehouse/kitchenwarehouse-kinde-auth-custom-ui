@@ -47,13 +47,11 @@ urlencoded.append("client_id", "6c0470e618ab41cfb0cde02661df8734");
 urlencoded.append("client_secret", "sfM0FxafvSY3WdhttflhOrsva9Q5T0rB2NkxYMWoHXSG03k8tzkW");
 urlencoded.append("audience", "https://kitchenwarehouse-staging.au.kinde.com/api");
 const requestOptions = {
-  method: "POST" as "POST" | "GET" | "PUT" | "DELETE" | "PATCH",
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
     "Access-Control-Allow-Methods": "*"
   },
   body: urlencoded,
-  redirect: "follow"
 };
 console.log({isNewKindeUser})
     const M2MToken = await axios.post(
