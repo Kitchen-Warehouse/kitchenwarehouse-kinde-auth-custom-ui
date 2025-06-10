@@ -9,14 +9,13 @@ import {
 
 export const workflowSettings = {
   id: 'postAuthentication',
-  name: 'HubspotSync',
-  failurePolicy: {
-    action: 'stop',
-  },
   trigger: WorkflowTrigger.PostAuthentication,
   bindings: {
-    'kinde.env': {},
+    'kinde.accessToken': {},
+    'kinde.localization': {},
     'kinde.fetch': {},
+    'kinde.env': {},
+    'kinde.mfa': {},
     url: {},
   },
 };
