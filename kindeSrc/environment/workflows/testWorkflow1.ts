@@ -13,10 +13,10 @@ export const workflowSettings = {
   },
 };
 
-export default async function TestWorkflow1 (event: onUserTokenGeneratedEvent) {
+export default async function TestWorkflow1(event: onUserTokenGeneratedEvent) {
   const accessToken = accessTokenCustomClaims<{
     customer_id: string;
   }>();
-
+console.log({accessToken})
   accessToken.customer_id = '12345';
 }
