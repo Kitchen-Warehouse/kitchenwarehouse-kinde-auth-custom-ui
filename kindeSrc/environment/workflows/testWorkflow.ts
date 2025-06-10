@@ -1,6 +1,7 @@
 import {
   WorkflowTrigger,
   accessTokenCustomClaims,
+  createKindeAPI,
   fetch,
   onPostAuthenticationEvent,
 } from '@kinde/infrastructure';
@@ -28,17 +29,7 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
   const body = new URLSearchParams();
   const userId = event.context.user.id
   body.append('userId', userId);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   const response: any = await fetch(
-//     'https://get-kwh-customer-by-email.netlify.app/get-user',
-//     {
-//       method: 'POST',
-//       responseFormat: 'text',
-//       headers: {},
-//       body,
-//     }
-//   );
-
+   const kindeAPI = await createKindeAPI(event);
 
 const urlencoded = new URLSearchParams();
 urlencoded.append("grant_type", "client_credentials");
@@ -55,11 +46,15 @@ const requestOptions = {
   redirect: "follow"
 };
 console.log({isNewKindeUser})
-    const M2MToken = await fetch(
-      'https://auth-staging.kitchenwarehouse.com.au/oauth2/token',
-      requestOptions
-    );
-console.log('M2MToken', M2MToken.data);
+  const { data } = await kindeAPI.post({
+      endpoint: `oauth2/token`,
+    });
+    console.log({data})
+//     const M2MToken = await fetch(
+//       'https://auth-staging.kitchenwarehouse.com.au/oauth2/token',
+//       requestOptions
+//     );
+// console.log('M2MToken', M2MToken.data);
 //   console.log('response', response?.data);
 //   console.log({response})
 
