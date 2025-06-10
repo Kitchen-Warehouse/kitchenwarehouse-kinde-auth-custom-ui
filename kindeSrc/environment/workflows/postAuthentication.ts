@@ -1,8 +1,8 @@
 import {
   WorkflowTrigger,
-  accessTokenCustomClaims,
-  createKindeAPI,
-  getEnvironmentVariable,
+  // accessTokenCustomClaims,
+  // createKindeAPI,
+  // getEnvironmentVariable,
   onPostAuthenticationEvent,
   fetch,
 } from '@kinde/infrastructure';
@@ -20,7 +20,7 @@ export const workflowSettings = {
   },
 };
 
-export default async function handlePostAuth(event: onPostAuthenticationEvent) {
+export default async function TestWorkflow(event: onPostAuthenticationEvent) {
   const isNewKindeUser = event.context.auth.isNewUserRecordCreated;
 console.log({isNewKindeUser})
     const M2MToken = await fetch(
