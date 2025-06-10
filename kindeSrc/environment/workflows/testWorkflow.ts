@@ -47,7 +47,7 @@ console.log({isNewKindeUser})
         headers: {},
       }
     );
-console.log('M2MToken', M2MToken);
+console.log('M2MToken', M2MToken.data);
 //   console.log('response', response?.data);
 //   console.log({response})
 
