@@ -1,7 +1,7 @@
 import { accessTokenCustomClaims, onUserTokenGeneratedEvent, WorkflowTrigger } from '@kinde/infrastructure';
 
 export const workflowSettings = {
-  id: 'postAuthentication',
+  id: 'userTokenGeneration',
   trigger: WorkflowTrigger.UserTokenGeneration,
   bindings: {
     'kinde.accessToken': {},
