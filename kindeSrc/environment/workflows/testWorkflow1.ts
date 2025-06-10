@@ -1,4 +1,17 @@
-import { accessTokenCustomClaims, onUserTokenGeneratedEvent } from '@kinde/infrastructure';
+import { accessTokenCustomClaims, onUserTokenGeneratedEvent, WorkflowTrigger } from '@kinde/infrastructure';
+
+export const workflowSettings = {
+  id: 'postAuthentication',
+  trigger: WorkflowTrigger.UserTokenGeneration,
+  bindings: {
+    'kinde.accessToken': {},
+    'kinde.localization': {},
+    'kinde.fetch': {},
+    'kinde.env': {},
+    'kinde.mfa': {},
+    url: {},
+  },
+};
 
 export default async function TestWorkflow1 (event: onUserTokenGeneratedEvent) {
   const accessToken = accessTokenCustomClaims<{
