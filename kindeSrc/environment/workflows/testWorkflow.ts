@@ -55,6 +55,7 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: body,
+        responseFormat: 'json',
       })
 
       if (!response.ok) {
@@ -98,6 +99,7 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          responseFormat: 'json',
         }
       )
     }
@@ -135,9 +137,9 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
     }
   }
 
-  // const data = await getCustomerId()
+  const data = await getCustomerId()
 
-  // console.log('DATAAA', data)
+  console.log('DATAAA', data)
 
   // Need email ID (can be in event)
 }
