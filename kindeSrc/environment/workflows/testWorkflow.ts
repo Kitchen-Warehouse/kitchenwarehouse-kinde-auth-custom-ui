@@ -143,9 +143,9 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
     }
   }
 
-  const data = await getCustomerId()
+  // const data = await getCustomerId()
 
-  console.log('DATAAA', data)
+  // console.log('DATAAA', data)
 
   // Need email ID (can be in event)
 }
