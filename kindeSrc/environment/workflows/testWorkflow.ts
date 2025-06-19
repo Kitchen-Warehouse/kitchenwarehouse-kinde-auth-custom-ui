@@ -1,7 +1,6 @@
 import {
   WorkflowTrigger,
   accessTokenCustomClaims,
-  createKindeAPI,
   fetch,
   onPostAuthenticationEvent,
 } from '@kinde/infrastructure'
@@ -33,25 +32,108 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
 
   console.log(event, userId)
 
-  // const kindeAPI = await createKindeAPI(event, {
-  //   clientSecretKey: 'sfM0FxafvSY3WdhttflhOrsva9Q5T0rB2NkxYMWoHXSG03k8tzkW',
-  //   clientIdKey: '6c0470e618ab41cfb0cde02661df8734',
-  //   version: 1,
-  //   clientId: '' as never,
-  //   clientSecret: '' as never,
-  // })
+  const getM2MAccesstoken = async (): Promise<string> => {
+    const url = 'https://auth-staging.kitchenwarehouse.com.au'
+    const client_id = '6c0470e618ab41cfb0cde02661df8734'
+    const client_secret = 'sfM0FxafvSY3WdhttflhOrsva9Q5T0rB2NkxYMWoHXSG03k8tzkW'
+    const audience = 'https://kitchenwarehouse-staging.au.kinde.com/api'
 
-  // const { data } = await kindeAPI.post({
-  //   endpoint: `https://auth-staging.kitchenwarehouse.com.au/oauth2/token`,
-  //   params: {
-  //     grant_type: 'client_credentials',
-  //     client_id: '6c0470e618ab41cfb0cde02661df8734',
-  //     client_secret: 'sfM0FxafvSY3WdhttflhOrsva9Q5T0rB2NkxYMWoHXSG03k8tzkW',
-  //     audience: 'https://kitchenwarehouse-staging.au.kinde.com/api',
-  //   },
-  // })
+    if (!url || !client_id || !client_secret || !audience) {
+      throw new Error('Missing required environment variables')
+    }
 
-  // console.log('Data', data)
+    const body = new URLSearchParams()
+    body.append('grant_type', 'client_credentials')
+    body.append('client_id', client_id)
+    body.append('client_secret', client_secret)
+    body.append('audience', audience)
+
+    const fetchToken = async (): Promise<string> => {
+      const response = await fetch(`${url}/oauth2/token`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: body,
+      })
+
+      if (!response.ok) {
+        throw new Error(
+          `Token request failed: ${response.status} ${response.statusText}`
+        )
+      }
+
+      const responseData = await response.json()
+
+      if (!responseData.access_token) {
+        throw new Error('No access token in response')
+      }
+
+      return responseData.access_token
+    }
+
+    try {
+      return await fetchToken()
+    } catch (error) {
+      throw error
+    }
+  }
+
+  const getCustomerId = async (): Promise<string | null> => {
+    const url = 'https://auth-staging.kitchenwarehouse.com.au'
+
+    if (!url) {
+      throw new Error('Missing Kinde URL')
+    }
+
+    const makeRequest = async (token: string): Promise<Response> => {
+      return await fetch(
+        `https://your_kinde_subdomain.kinde.com/api/v1/user?id=${userId}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+    }
+
+    const extractCustomerId = (data: {
+      properties: [{ key: string; value: string }]
+    }): string | null => {
+      const customerIdData = data?.properties?.find(
+        (property) => property.key === 'customer_id'
+      )
+      return customerIdData?.value || null
+    }
+
+    try {
+      // Get initial access token
+      let access_token = await getM2MAccesstoken()
+      let response = await makeRequest(access_token)
+
+      // If token is expired/invalid (403), get a fresh token and retry
+      if (response.status === 403) {
+        access_token = await getM2MAccesstoken()
+        response = await makeRequest(access_token)
+      }
+
+      if (!response.ok) {
+        throw new Error(
+          `API request failed: ${response.status} ${response.statusText}`
+        )
+      }
+
+      const data = await response.json()
+      return extractCustomerId(data)
+    } catch (error) {
+      throw error
+    }
+  }
+
+  const data = await getCustomerId()
+
+  console.log('DATAAA', data)
 
   // Need email ID (can be in event)
 }
