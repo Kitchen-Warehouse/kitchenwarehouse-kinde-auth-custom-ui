@@ -92,16 +92,13 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
     }
 
     const makeRequest = async (token: string): Promise<Response> => {
-      return await fetch(
-        `https://your_kinde_subdomain.kinde.com/api/v1/user?id=${userId}`,
-        {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          responseFormat: 'json',
-        }
-      )
+      return await fetch(`${url}/api/v1/user?id=${userId}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        responseFormat: 'json',
+      })
     }
 
     const extractCustomerId = (data: {
