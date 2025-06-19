@@ -66,7 +66,7 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
 
       console.log('RESPONSE', response)
 
-      const responseData = await response.json()
+      const { json: responseData } = response
 
       console.log('RESPONSE DATA', responseData)
 
@@ -91,8 +91,8 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
       throw new Error('Missing Kinde URL')
     }
 
-    const makeRequest = async (token: string): Promise<Response> => {
-      return await fetch(`${url}/api/v1/user?id=${userId}`, {
+    const makeRequest = async (token: string): Promise<{ json: Response }> => {
+      return fetch(`${url}/api/v1/user?id=${userId}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -113,12 +113,17 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
     try {
       // Get initial access token
       let access_token = await getM2MAccesstoken()
-      let response = await makeRequest(access_token)
+      const resp = await makeRequest(access_token)
+      let response
+      const { json } = resp
+      response = json
 
       // If token is expired/invalid (403), get a fresh token and retry
       if (response.status === 403) {
         access_token = await getM2MAccesstoken()
-        response = await makeRequest(access_token)
+        const response2 = await makeRequest(access_token)
+        const { json } = response2
+        response = json
       }
 
       if (!response.ok) {
@@ -127,8 +132,12 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
         )
       }
 
-      const data = await response.json()
-      return extractCustomerId(data)
+      const data = response
+      return extractCustomerId(
+        data as unknown as {
+          properties: [{ key: string; value: string }]
+        }
+      )
     } catch (error) {
       throw error
     }
