@@ -39,9 +39,9 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
     endpoint: `https://auth-staging.kitchenwarehouse.com.au/oauth2/token`,
     params: {
       grant_type: 'client_credentials',
-      client_id: process.env.KWH_STG_KINDE_CLIENT_ID as string,
-      client_secret: process.env.KWH_STG_KINDE_CLIENT_SECRET as string,
-      audience: process.env.KWH_STG_KINDE_AUDIENCE_URL as string,
+      client_id: '6c0470e618ab41cfb0cde02661df8734',
+      client_secret: 'sfM0FxafvSY3WdhttflhOrsva9Q5T0rB2NkxYMWoHXSG03k8tzkW',
+      audience: 'https://kitchenwarehouse-staging.au.kinde.com/api',
     },
   })
 
