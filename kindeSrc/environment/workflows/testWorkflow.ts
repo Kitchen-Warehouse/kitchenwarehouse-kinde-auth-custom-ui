@@ -1,8 +1,14 @@
-import { accessTokenCustomClaims, onUserTokenGeneratedEvent, WorkflowTrigger } from '@kinde/infrastructure';
+import {
+  WorkflowTrigger,
+  accessTokenCustomClaims,
+  createKindeAPI,
+  fetch,
+  onPostAuthenticationEvent,
+} from '@kinde/infrastructure'
 
 export const workflowSettings = {
-  id: 'userTokenGeneration',
-  trigger: WorkflowTrigger.UserTokenGeneration,
+  id: 'postAuthentication',
+  trigger: WorkflowTrigger.PostAuthentication,
   bindings: {
     'kinde.accessToken': {},
     'kinde.localization': {},
@@ -11,12 +17,18 @@ export const workflowSettings = {
     'kinde.mfa': {},
     url: {},
   },
-};
+}
 
-export default async function TestWorkflow1(event: onUserTokenGeneratedEvent) {
-  const accessToken = accessTokenCustomClaims<{
-    customer_id: string;
-  }>();
-console.log({accessToken})
-  accessToken.customer_id = '12345';
+export default async function TestWorkflow(event: onPostAuthenticationEvent) {
+  //   const accessToken = accessTokenCustomClaims<{
+  //     customerId: string;
+  //   }>();
+  console.log({ event })
+  const isNewKindeUser = event.context.auth.isNewUserRecordCreated
+  console.log({ userId: event.context.user, isNewKindeUser })
+
+  const userId = event.context.user.id
+
+  console.log(event, userId)
+  // Need email ID (can be in event)
 }
