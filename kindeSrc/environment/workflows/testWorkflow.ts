@@ -33,25 +33,25 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
 
   console.log(event, userId)
 
-  const kindeAPI = await createKindeAPI(event, {
-    clientSecretKey: 'sfM0FxafvSY3WdhttflhOrsva9Q5T0rB2NkxYMWoHXSG03k8tzkW',
-    clientIdKey: '6c0470e618ab41cfb0cde02661df8734',
-    version: 1,
-    clientId: '' as never,
-    clientSecret: '' as never,
-  })
+  // const kindeAPI = await createKindeAPI(event, {
+  //   clientSecretKey: 'sfM0FxafvSY3WdhttflhOrsva9Q5T0rB2NkxYMWoHXSG03k8tzkW',
+  //   clientIdKey: '6c0470e618ab41cfb0cde02661df8734',
+  //   version: 1,
+  //   clientId: '' as never,
+  //   clientSecret: '' as never,
+  // })
 
-  const { data } = await kindeAPI.post({
-    endpoint: `https://auth-staging.kitchenwarehouse.com.au/oauth2/token`,
-    params: {
-      grant_type: 'client_credentials',
-      client_id: '6c0470e618ab41cfb0cde02661df8734',
-      client_secret: 'sfM0FxafvSY3WdhttflhOrsva9Q5T0rB2NkxYMWoHXSG03k8tzkW',
-      audience: 'https://kitchenwarehouse-staging.au.kinde.com/api',
-    },
-  })
+  // const { data } = await kindeAPI.post({
+  //   endpoint: `https://auth-staging.kitchenwarehouse.com.au/oauth2/token`,
+  //   params: {
+  //     grant_type: 'client_credentials',
+  //     client_id: '6c0470e618ab41cfb0cde02661df8734',
+  //     client_secret: 'sfM0FxafvSY3WdhttflhOrsva9Q5T0rB2NkxYMWoHXSG03k8tzkW',
+  //     audience: 'https://kitchenwarehouse-staging.au.kinde.com/api',
+  //   },
+  // })
 
-  console.log('Data', data)
+  // console.log('Data', data)
 
   // Need email ID (can be in event)
 }
