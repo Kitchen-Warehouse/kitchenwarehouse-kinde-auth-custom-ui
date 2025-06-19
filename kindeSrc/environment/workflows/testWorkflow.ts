@@ -63,9 +63,11 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
         )
       }
 
+      console.log('RESPONSE', response)
+
       const responseData = await response.json()
 
-      console.log('RESPONSE', responseData)
+      console.log('RESPONSE DATA', responseData)
 
       if (!responseData.access_token) {
         throw new Error('No access token in response')
