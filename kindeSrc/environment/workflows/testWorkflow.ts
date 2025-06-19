@@ -20,9 +20,11 @@ export const workflowSettings = {
 }
 
 export default async function TestWorkflow(event: onPostAuthenticationEvent) {
-  //   const accessToken = accessTokenCustomClaims<{
-  //     customerId: string;
-  //   }>();
+  const accessToken = accessTokenCustomClaims<{
+    customerId: string
+  }>()
+  console.log('Access Token', accessToken)
+
   console.log({ event })
   const isNewKindeUser = event.context.auth.isNewUserRecordCreated
   console.log({ userId: event.context.user, isNewKindeUser })
