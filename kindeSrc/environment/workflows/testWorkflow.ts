@@ -34,14 +34,6 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
   console.log(event, userId)
 
   const kindeAPI = await createKindeAPI(event)
-  const body = new URLSearchParams()
-  body.append('grant_type', 'client_credentials')
-  body.append('client_id', process.env.KWH_STG_KINDE_CLIENT_ID as string)
-  body.append(
-    'client_secret',
-    process.env.KWH_STG_KINDE_CLIENT_SECRET as string
-  )
-  body.append('audience', process.env.KWH_STG_KINDE_AUDIENCE_URL as string)
 
   const { data } = await kindeAPI.post({
     endpoint: `https://auth-staging.kitchenwarehouse.com.au/oauth2/token`,
