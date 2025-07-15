@@ -10,6 +10,7 @@ import {
   type KindePageEvent,
 } from '@kinde/infrastructure';
 import React from 'react';
+import { DataDogScript } from './DataDogScript';
 
 interface LayoutProps extends KindePageEvent {
   children: React.ReactNode;
@@ -643,6 +644,7 @@ export const Layout = ({
         />
       </head>
       <body style={{ display: 'flex', flexDirection: 'column' }}>
+        <DataDogScript />
         {logo && (
           <header>
             <div className='header-container'>
