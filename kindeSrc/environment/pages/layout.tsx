@@ -438,12 +438,12 @@ export const Layout = ({
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: rgba(255, 255, 255, 0.9);
+                background-color: rgba(255, 255, 255, 0.95);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                z-index: 1000;
+                z-index: 9999;
                 transition: opacity 0.3s;
               }
 
@@ -480,6 +480,8 @@ export const Layout = ({
               const loadingOverlay = document.createElement('div');
               loadingOverlay.className = 'auth-loading-overlay';
               loadingOverlay.id = 'kinde-auth-loader';
+              loadingOverlay.style.display = 'flex'; // Ensure display is set to flex
+              loadingOverlay.style.zIndex = '9999'; // Increase z-index to make sure it's on top
               
               const spinner = document.createElement('div');
               spinner.className = 'custom-spinner';
@@ -584,7 +586,8 @@ export const Layout = ({
                     (closestButton && closestButton.type === 'submit') ||
                     isPrimaryButton) {
                   
-                  // Show loader
+                  // Show loader immediately
+                  loadingOverlay.style.display = 'flex';
                   loadingOverlay.classList.remove('auth-loading-hidden');
                   
                   // Clear any existing timeout
@@ -620,7 +623,16 @@ export const Layout = ({
               
               // Handle form submissions
               document.addEventListener('submit', function(e) {
+                loadingOverlay.style.display = 'flex';
                 loadingOverlay.classList.remove('auth-loading-hidden');
+              });
+              
+              // Handle keydown events for Enter key in form fields (forms can be submitted with Enter)
+              document.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && document.activeElement.tagName.toLowerCase() === 'input') {
+                  loadingOverlay.style.display = 'flex';
+                  loadingOverlay.classList.remove('auth-loading-hidden');
+                }
               });
               
               // Monitor for DOM changes that indicate page load completion
