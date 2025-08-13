@@ -433,37 +433,46 @@ export const Layout = ({
 
               /* Loading Styles */
               .auth-loading-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(255, 255, 255, 0.95);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                z-index: 9999;
-                transition: opacity 0.3s;
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                background-color: rgba(255, 255, 255, 0.98) !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+                z-index: 999999 !important;
+                transition: none !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
               }
 
               .auth-loading-hidden {
-                opacity: 0;
-                pointer-events: none;
+                display: none !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+                visibility: hidden !important;
               }
 
               /* Custom Spinner */
               .custom-spinner {
-                display: inline-block;
-                width: 40px;
-                height: 40px;
-                border: 5px solid #161616;
-                border-radius: 50%;
-                border-top-color: transparent;
-                animation: spin 1s linear infinite;
+                display: inline-block !important;
+                width: 60px !important;
+                height: 60px !important;
+                border: 6px solid #d4352b !important;
+                border-radius: 50% !important;
+                border-top-color: transparent !important;
+                animation: spin 1s linear infinite !important;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.1) !important;
               }
 
               @keyframes spin {
+                0% {
+                  transform: rotate(0deg);
+                }
                 to {
                   transform: rotate(360deg);
                 }
@@ -476,15 +485,41 @@ export const Layout = ({
             __html: `
             // Create loading overlay
             document.addEventListener('DOMContentLoaded', function() {
+              // Remove any existing loaders first to avoid duplicates
+              const existingLoader = document.getElementById('kinde-auth-loader');
+              if (existingLoader) {
+                existingLoader.parentNode.removeChild(existingLoader);
+              }
+              
               // Create loading elements
               const loadingOverlay = document.createElement('div');
               loadingOverlay.className = 'auth-loading-overlay';
               loadingOverlay.id = 'kinde-auth-loader';
-              loadingOverlay.style.display = 'flex'; // Ensure display is set to flex
-              loadingOverlay.style.zIndex = '9999'; // Increase z-index to make sure it's on top
+              
+              // Force all critical styles inline to prevent CSS conflicts
+              loadingOverlay.style.position = 'fixed';
+              loadingOverlay.style.top = '0';
+              loadingOverlay.style.left = '0';
+              loadingOverlay.style.width = '100%';
+              loadingOverlay.style.height = '100%';
+              loadingOverlay.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+              loadingOverlay.style.display = 'flex';
+              loadingOverlay.style.flexDirection = 'column';
+              loadingOverlay.style.alignItems = 'center';
+              loadingOverlay.style.justifyContent = 'center';
+              loadingOverlay.style.zIndex = '999999'; // Super high z-index
               
               const spinner = document.createElement('div');
               spinner.className = 'custom-spinner';
+              // Also add inline styles for the spinner to ensure it displays correctly
+              spinner.style.display = 'inline-block';
+              spinner.style.width = '60px';
+              spinner.style.height = '60px';
+              spinner.style.border = '6px solid #d4352b';
+              spinner.style.borderRadius = '50%';
+              spinner.style.borderTopColor = 'transparent';
+              spinner.style.animation = 'spin 1s linear infinite';
+              spinner.style.boxShadow = '0 0 15px rgba(0, 0, 0, 0.1)';
               
               const loadingText = document.createElement('p');
               loadingText.innerText = '';
@@ -495,14 +530,32 @@ export const Layout = ({
               loadingOverlay.appendChild(loadingText);
               document.body.appendChild(loadingOverlay);
               
-              // Show loader initially
+              // Show loader initially - ensure it's fully visible
               loadingOverlay.classList.remove('auth-loading-hidden');
+              // Force display
+              document.body.style.overflow = 'hidden'; // Prevent scrolling while loading
+              
+              // Define a function to hide the loader
+              const hideLoader = function() {
+                loadingOverlay.classList.add('auth-loading-hidden');
+                loadingOverlay.style.display = 'none';
+                loadingOverlay.style.visibility = 'hidden';
+                loadingOverlay.style.opacity = '0';
+                document.body.style.overflow = ''; // Restore scrolling
+              };
+              
+              // Define a function to show the loader
+              const showLoader = function() {
+                loadingOverlay.classList.remove('auth-loading-hidden');
+                loadingOverlay.style.display = 'flex';
+                loadingOverlay.style.visibility = 'visible';
+                loadingOverlay.style.opacity = '1';
+                document.body.style.overflow = 'hidden';
+              };
               
               // Hide loader when page is fully loaded
               window.addEventListener('load', function() {
-                setTimeout(() => {
-                  loadingOverlay.classList.add('auth-loading-hidden');
-                }, 300);
+                setTimeout(hideLoader, 300);
               });
               
               // Track navigation completion
@@ -511,7 +564,7 @@ export const Layout = ({
               // Handle browser back/forward navigation
               window.addEventListener('popstate', function() {
                 // Show loader during browser navigation events
-                loadingOverlay.classList.remove('auth-loading-hidden');
+                showLoader();
                 
                 // Clear any existing timeout
                 if (navigationTimeout) {
@@ -519,9 +572,7 @@ export const Layout = ({
                 }
                 
                 // Set a timeout to hide the loader
-                navigationTimeout = setTimeout(() => {
-                  loadingOverlay.classList.add('auth-loading-hidden');
-                }, 1500); // 1.5 seconds for browser navigation
+                navigationTimeout = setTimeout(hideLoader, 1500); // 1.5 seconds for browser navigation
               });
               
               // Intercept history changes (pushState/replaceState)
@@ -531,7 +582,7 @@ export const Layout = ({
               window.history.pushState = function() {
                 originalPushState.apply(this, arguments);
                 // Show loader when history state changes
-                loadingOverlay.classList.remove('auth-loading-hidden');
+                showLoader();
                 
                 // Clear any existing timeout
                 if (navigationTimeout) {
@@ -539,15 +590,13 @@ export const Layout = ({
                 }
                 
                 // Set a timeout to hide the loader
-                navigationTimeout = setTimeout(() => {
-                  loadingOverlay.classList.add('auth-loading-hidden');
-                }, 1500);
+                navigationTimeout = setTimeout(hideLoader, 1500);
               };
               
               window.history.replaceState = function() {
                 originalReplaceState.apply(this, arguments);
                 // Show loader when history state changes
-                loadingOverlay.classList.remove('auth-loading-hidden');
+                showLoader();
                 
                 // Clear any existing timeout
                 if (navigationTimeout) {
@@ -555,9 +604,7 @@ export const Layout = ({
                 }
                 
                 // Set a timeout to hide the loader
-                navigationTimeout = setTimeout(() => {
-                  loadingOverlay.classList.add('auth-loading-hidden');
-                }, 1500);
+                navigationTimeout = setTimeout(hideLoader, 1500);
               };
               
               // Show loader on any link click within authentication pages
@@ -587,8 +634,7 @@ export const Layout = ({
                     isPrimaryButton) {
                   
                   // Show loader immediately
-                  loadingOverlay.style.display = 'flex';
-                  loadingOverlay.classList.remove('auth-loading-hidden');
+                  showLoader();
                   
                   // Clear any existing timeout
                   if (navigationTimeout) {
@@ -615,23 +661,35 @@ export const Layout = ({
                   }
                   
                   // Set a backup timeout to hide the loader if navigation doesn't complete
-                  navigationTimeout = setTimeout(() => {
-                    loadingOverlay.classList.add('auth-loading-hidden');
-                  }, timeoutDuration);
+                  navigationTimeout = setTimeout(hideLoader, timeoutDuration);
                 }
               });
               
               // Handle form submissions
               document.addEventListener('submit', function(e) {
-                loadingOverlay.style.display = 'flex';
-                loadingOverlay.classList.remove('auth-loading-hidden');
+                showLoader();
               });
               
               // Handle keydown events for Enter key in form fields (forms can be submitted with Enter)
               document.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' && document.activeElement.tagName.toLowerCase() === 'input') {
-                  loadingOverlay.style.display = 'flex';
-                  loadingOverlay.classList.remove('auth-loading-hidden');
+                if (e.key === 'Enter') {
+                  const activeElement = document.activeElement;
+                  // Check if the active element is in a form context that would trigger submission
+                  if (activeElement && 
+                      (activeElement.tagName.toLowerCase() === 'input' ||
+                       activeElement.tagName.toLowerCase() === 'textarea' ||
+                       activeElement.tagName.toLowerCase() === 'select') &&
+                      activeElement.closest('form')) {
+                    
+                    // Don't show loader for input type="search" or textarea with no form
+                    const inputType = activeElement.getAttribute('type');
+                    if (inputType === 'search' || 
+                        (activeElement.tagName.toLowerCase() === 'textarea' && !activeElement.form)) {
+                      return;
+                    }
+                    
+                    showLoader();
+                  }
                 }
               });
               
@@ -646,7 +704,7 @@ export const Layout = ({
                 
                 if (kindeContentLoaded) {
                   setTimeout(() => {
-                    loadingOverlay.classList.add('auth-loading-hidden');
+                    hideLoader();
                     if (navigationTimeout) {
                       clearTimeout(navigationTimeout);
                     }
