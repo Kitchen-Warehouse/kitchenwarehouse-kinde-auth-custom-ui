@@ -11,8 +11,6 @@
   "dependencies": {
     "@kinde-oss/kinde-auth-nextjs": "^2.7.0",
     "@kinde/infrastructure": "^0.4.1",
-    "@datadog/browser-logs": "^6.12.2",
-    "@datadog/browser-rum": "^6.12.2",
     "next": "15.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

@@ -10,7 +10,6 @@ import {
   type KindePageEvent,
 } from '@kinde/infrastructure'
 import React from 'react'
-import { DataDogScript } from './DataDogScript'
 
 interface LayoutProps extends KindePageEvent {
   children: React.ReactNode
@@ -622,39 +621,6 @@ export const Layout = ({
               // Handle form submissions
               document.addEventListener('submit', function(e) {
                 loadingOverlay.classList.remove('auth-loading-hidden');
-                
-                // Clear any existing timeout
-                if (navigationTimeout) {
-                  clearTimeout(navigationTimeout);
-                }
-                
-                // Set a timeout to hide the loader if form submission doesn't navigate away
-                navigationTimeout = setTimeout(() => {
-                  loadingOverlay.classList.add('auth-loading-hidden');
-                }, 5000); // 5 seconds for form submissions
-              });
-              
-              // Handle Enter key press in form inputs to trigger loader
-              document.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                  const target = e.target;
-                  // Check if the target is within a form
-                  const form = target.closest('form');
-                  if (form) {
-                    // Show loader when Enter is pressed in a form input
-                    loadingOverlay.classList.remove('auth-loading-hidden');
-                    
-                    // Clear any existing timeout
-                    if (navigationTimeout) {
-                      clearTimeout(navigationTimeout);
-                    }
-                    
-                    // Set a timeout to hide the loader
-                    navigationTimeout = setTimeout(() => {
-                      loadingOverlay.classList.add('auth-loading-hidden');
-                    }, 5000); // 5 seconds for Enter key form submissions
-                  }
-                }
               });
               
               // Monitor for DOM changes that indicate page load completion
@@ -694,7 +660,6 @@ export const Layout = ({
         />
       </head>
       <body style={{ display: 'flex', flexDirection: 'column' }}>
-        <DataDogScript />
         {logo && (
           <header>
             <div className='header-container'>
