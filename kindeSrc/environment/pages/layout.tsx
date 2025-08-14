@@ -483,248 +483,205 @@ export const Layout = ({
           nonce={getKindeNonce()}
           dangerouslySetInnerHTML={{
             __html: `
-            // Create loading overlay
-            document.addEventListener('DOMContentLoaded', function() {
-              // Remove any existing loaders first to avoid duplicates
-              const existingLoader = document.getElementById('kinde-auth-loader');
-              if (existingLoader) {
-                existingLoader.parentNode.removeChild(existingLoader);
+            // Create immediate loading overlay
+            (function() {
+              console.log('Kinde loader script starting...');
+              
+              // Create loader immediately - don't wait for anything
+              function createAndShowLoader() {
+                // Remove any existing loader
+                const existing = document.getElementById('kinde-auth-loader');
+                if (existing) {
+                  existing.remove();
+                }
+                
+                // Add spinner styles
+                if (!document.getElementById('kinde-spinner-styles')) {
+                  const style = document.createElement('style');
+                  style.id = 'kinde-spinner-styles';
+                  style.textContent = \`
+                    @keyframes kinde-spin {
+                      0% { transform: rotate(0deg); }
+                      100% { transform: rotate(360deg); }
+                    }
+                  \`;
+                  document.head.appendChild(style);
+                }
+                
+                // Create overlay
+                const overlay = document.createElement('div');
+                overlay.id = 'kinde-auth-loader';
+                overlay.innerHTML = '<div style="width:60px;height:60px;border:6px solid #d4352b;border-radius:50%;border-top-color:transparent;animation:kinde-spin 1s linear infinite;"></div>';
+                
+                // Apply styles directly
+                Object.assign(overlay.style, {
+                  position: 'fixed',
+                  top: '0',
+                  left: '0',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: 'rgba(255, 255, 255, 0.98)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: '999999',
+                  opacity: '1'
+                });
+                
+                // Add to body
+                document.body.appendChild(overlay);
+                document.body.style.overflow = 'hidden';
+                
+                console.log('Loader created and shown');
+                return overlay;
               }
               
-              // Create loading elements
-              const loadingOverlay = document.createElement('div');
-              loadingOverlay.className = 'auth-loading-overlay';
-              loadingOverlay.id = 'kinde-auth-loader';
+              // Show loader immediately
+              const loader = createAndShowLoader();
+              let isVisible = true;
+              let hideTimeout = null;
               
-              // Force all critical styles inline to prevent CSS conflicts
-              loadingOverlay.style.position = 'fixed';
-              loadingOverlay.style.top = '0';
-              loadingOverlay.style.left = '0';
-              loadingOverlay.style.width = '100%';
-              loadingOverlay.style.height = '100%';
-              loadingOverlay.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
-              loadingOverlay.style.display = 'flex';
-              loadingOverlay.style.flexDirection = 'column';
-              loadingOverlay.style.alignItems = 'center';
-              loadingOverlay.style.justifyContent = 'center';
-              loadingOverlay.style.zIndex = '999999'; // Super high z-index
-              
-              const spinner = document.createElement('div');
-              spinner.className = 'custom-spinner';
-              // Also add inline styles for the spinner to ensure it displays correctly
-              spinner.style.display = 'inline-block';
-              spinner.style.width = '60px';
-              spinner.style.height = '60px';
-              spinner.style.border = '6px solid #d4352b';
-              spinner.style.borderRadius = '50%';
-              spinner.style.borderTopColor = 'transparent';
-              spinner.style.animation = 'spin 1s linear infinite';
-              spinner.style.boxShadow = '0 0 15px rgba(0, 0, 0, 0.1)';
-              
-              const loadingText = document.createElement('p');
-              loadingText.innerText = '';
-              loadingText.style.marginTop = '10px';
-              
-              // Add elements to DOM
-              loadingOverlay.appendChild(spinner);
-              loadingOverlay.appendChild(loadingText);
-              document.body.appendChild(loadingOverlay);
-              
-              // Show loader initially - ensure it's fully visible
-              loadingOverlay.classList.remove('auth-loading-hidden');
-              // Force display
-              document.body.style.overflow = 'hidden'; // Prevent scrolling while loading
-              
-              // Define a function to hide the loader
-              const hideLoader = function() {
-                loadingOverlay.classList.add('auth-loading-hidden');
-                loadingOverlay.style.display = 'none';
-                loadingOverlay.style.visibility = 'hidden';
-                loadingOverlay.style.opacity = '0';
-                document.body.style.overflow = ''; // Restore scrolling
-              };
-              
-              // Define a function to show the loader
-              const showLoader = function() {
-                loadingOverlay.classList.remove('auth-loading-hidden');
-                loadingOverlay.style.display = 'flex';
-                loadingOverlay.style.visibility = 'visible';
-                loadingOverlay.style.opacity = '1';
-                document.body.style.overflow = 'hidden';
-              };
-              
-              // Hide loader when page is fully loaded
-              window.addEventListener('load', function() {
-                setTimeout(hideLoader, 300);
-              });
-              
-              // Track navigation completion
-              let navigationTimeout;
-              
-              // Handle browser back/forward navigation
-              window.addEventListener('popstate', function() {
-                // Show loader during browser navigation events
-                showLoader();
+              function hideLoader() {
+                if (!isVisible || !loader) return;
+                console.log('Hiding loader');
                 
-                // Clear any existing timeout
-                if (navigationTimeout) {
-                  clearTimeout(navigationTimeout);
+                loader.style.opacity = '0';
+                document.body.style.overflow = '';
+                isVisible = false;
+                
+                setTimeout(() => {
+                  if (loader && loader.parentNode) {
+                    loader.remove();
+                  }
+                }, 300);
+              }
+              
+              function showLoader() {
+                if (isVisible) return;
+                console.log('Showing loader');
+                
+                if (hideTimeout) {
+                  clearTimeout(hideTimeout);
+                  hideTimeout = null;
                 }
                 
-                // Set a timeout to hide the loader
-                navigationTimeout = setTimeout(hideLoader, 1500); // 1.5 seconds for browser navigation
+                const newLoader = createAndShowLoader();
+                isVisible = true;
+              }
+              
+              function scheduleHide(delay) {
+                if (hideTimeout) clearTimeout(hideTimeout);
+                hideTimeout = setTimeout(hideLoader, delay);
+              }
+              
+              // Hide loader when page loads
+              function handlePageLoad() {
+                console.log('Page loaded, scheduling hide');
+                scheduleHide(500);
+              }
+              
+              if (document.readyState === 'complete') {
+                handlePageLoad();
+              } else {
+                window.addEventListener('load', handlePageLoad);
+              }
+              
+              // Show loader on navigation
+              window.addEventListener('beforeunload', () => {
+                console.log('Before unload - showing loader');
+                showLoader();
               });
               
-              // Intercept history changes (pushState/replaceState)
-              const originalPushState = window.history.pushState;
-              const originalReplaceState = window.history.replaceState;
+              window.addEventListener('popstate', () => {
+                console.log('Popstate - showing loader');
+                showLoader();
+                scheduleHide(1500);
+              });
               
-              window.history.pushState = function() {
+              // Intercept history API
+              const originalPushState = history.pushState;
+              const originalReplaceState = history.replaceState;
+              
+              history.pushState = function() {
+                console.log('pushState intercepted');
+                showLoader();
                 originalPushState.apply(this, arguments);
-                // Show loader when history state changes
-                showLoader();
-                
-                // Clear any existing timeout
-                if (navigationTimeout) {
-                  clearTimeout(navigationTimeout);
-                }
-                
-                // Set a timeout to hide the loader
-                navigationTimeout = setTimeout(hideLoader, 1500);
+                scheduleHide(1500);
               };
               
-              window.history.replaceState = function() {
+              history.replaceState = function() {
+                console.log('replaceState intercepted');
+                showLoader();
                 originalReplaceState.apply(this, arguments);
-                // Show loader when history state changes
-                showLoader();
-                
-                // Clear any existing timeout
-                if (navigationTimeout) {
-                  clearTimeout(navigationTimeout);
-                }
-                
-                // Set a timeout to hide the loader
-                navigationTimeout = setTimeout(hideLoader, 1500);
+                scheduleHide(1500);
               };
               
-              // Show loader on any link click within authentication pages
+              // Handle clicks on interactive elements
               document.addEventListener('click', function(e) {
-                const closestLink = e.target.closest('a');
-                const closestButton = e.target.closest('button');
-                // Check if the click is on a payment logo image in the footer
-                const isPaymentLogo = e.target.closest('footer img');
+                const link = e.target.closest('a');
+                const button = e.target.closest('button');
+                const isKindeElement = e.target.closest('.kinde-text-link, .kinde-button-variant-primary');
                 
-                const isKindeTextLink = e.target.classList && (
-                  e.target.classList.contains('kinde-text-link') || 
-                  (e.target.parentElement && e.target.parentElement.classList.contains('kinde-text-link'))
-                );
-                const isPrimaryButton = e.target.classList && (
-                  e.target.classList.contains('kinde-button-variant-primary') ||
-                  (e.target.closest('.kinde-button-variant-primary'))
-                );
-                
-                // Skip showing loader for payment logo images that aren't wrapped in links
-                if (isPaymentLogo && !closestLink) {
-                  return;
-                }
-                
-                if (isKindeTextLink || 
-                    (closestLink && closestLink.href) || 
-                    (closestButton && closestButton.type === 'submit') ||
-                    isPrimaryButton) {
+                if (link && link.href) {
+                  // Check if external link
+                  try {
+                    const url = new URL(link.href);
+                    if (url.hostname !== location.hostname) {
+                      console.log('External link clicked');
+                      showLoader();
+                      return; // Don't schedule hide for external links
+                    }
+                  } catch (e) {}
                   
-                  // Show loader immediately
+                  console.log('Internal link clicked');
                   showLoader();
-                  
-                  // Clear any existing timeout
-                  if (navigationTimeout) {
-                    clearTimeout(navigationTimeout);
-                  }
-                  
-                  // For external links, don't set a timeout to hide the loader
-                  // since we want the loader to remain visible until navigation completes
-                  if (closestLink && closestLink.href && 
-                      (closestLink.href.indexOf('http://') === 0 || 
-                       closestLink.href.indexOf('https://') === 0) &&
-                      closestLink.hostname !== window.location.hostname) {
-                    // For external links, don't hide the loader automatically
-                    // The page will fully navigate away, so the loader should stay visible
-                    return;
-                  }
-                  
-                  // Set timeout based on what was clicked
-                  // Use shorter timeout for text links, longer for buttons
-                  let timeoutDuration = 1000; // default 1 second for text links
-                  
-                  if (isPrimaryButton || (closestButton && closestButton.type === 'submit')) {
-                    timeoutDuration = 3000; // 3 seconds for primary buttons and submit buttons
-                  }
-                  
-                  // Set a backup timeout to hide the loader if navigation doesn't complete
-                  navigationTimeout = setTimeout(hideLoader, timeoutDuration);
+                  scheduleHide(1000);
+                } else if ((button && button.type === 'submit') || isKindeElement) {
+                  console.log('Button/Kinde element clicked');
+                  showLoader();
+                  scheduleHide(3000);
                 }
               });
               
               // Handle form submissions
               document.addEventListener('submit', function(e) {
+                console.log('Form submitted');
                 showLoader();
+                scheduleHide(3000);
               });
               
-              // Handle keydown events for Enter key in form fields (forms can be submitted with Enter)
-              document.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                  const activeElement = document.activeElement;
-                  // Check if the active element is in a form context that would trigger submission
-                  if (activeElement && 
-                      (activeElement.tagName.toLowerCase() === 'input' ||
-                       activeElement.tagName.toLowerCase() === 'textarea' ||
-                       activeElement.tagName.toLowerCase() === 'select') &&
-                      activeElement.closest('form')) {
-                    
-                    // Don't show loader for input type="search" or textarea with no form
-                    const inputType = activeElement.getAttribute('type');
-                    if (inputType === 'search' || 
-                        (activeElement.tagName.toLowerCase() === 'textarea' && !activeElement.form)) {
-                      return;
-                    }
-                    
-                    showLoader();
-                  }
-                }
-              });
-              
-              // Monitor for DOM changes that indicate page load completion
-              const observer = new MutationObserver(function(mutations) {
-                // Check if mutations indicate auth content has loaded
-                const kindeContentLoaded = mutations.some(mutation => {
-                  return mutation.addedNodes.length > 0 || 
-                         (mutation.target.classList && 
-                          mutation.target.classList.contains('kinde-button-variant-primary'));
-                });
-                
-                if (kindeContentLoaded) {
-                  setTimeout(() => {
-                    hideLoader();
-                    if (navigationTimeout) {
-                      clearTimeout(navigationTimeout);
-                    }
-                  }, 300);
-                }
-              });
-              
-              // Start observing once DOM is loaded
-              setTimeout(() => {
+              // Monitor for Kinde content
+              function checkForKindeContent() {
                 const kindeRoot = document.querySelector('[data-kinde-root]');
-                if (kindeRoot) {
-                  observer.observe(kindeRoot, {
-                    childList: true,
-                    subtree: true,
-                    attributes: true,
-                    characterData: false
-                  });
+                const kindeButtons = document.querySelectorAll('.kinde-button-variant-primary');
+                
+                if (kindeRoot || kindeButtons.length > 0) {
+                  console.log('Kinde content detected');
+                  scheduleHide(300);
+                  return true;
                 }
-              }, 500);
-            });
+                return false;
+              }
+              
+              // Check periodically for content
+              const contentChecker = setInterval(() => {
+                if (checkForKindeContent()) {
+                  clearInterval(contentChecker);
+                }
+              }, 100);
+              
+              // Clear checker after 10 seconds
+              setTimeout(() => clearInterval(contentChecker), 10000);
+              
+              // Expose for debugging
+              window.kindeLoader = {
+                show: showLoader,
+                hide: hideLoader,
+                isVisible: () => isVisible
+              };
+              
+              console.log('Kinde loader initialized');
+            })();
           `,
           }}
         />

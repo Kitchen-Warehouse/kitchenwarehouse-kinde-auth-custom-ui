@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@kinde-oss/kinde-auth-nextjs": "^2.7.0",
-    "@kinde/infrastructure": "^0.4.1",
+    "@kinde-oss/kinde-auth-nextjs": "^2.8.6",
+    "@kinde/infrastructure": "^0.7.2",
     "next": "15.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
