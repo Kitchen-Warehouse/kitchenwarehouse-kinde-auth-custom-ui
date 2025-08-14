@@ -236,7 +236,7 @@
   resolved "https://registry.yarnpkg.com/@img/sharp-win32-x64/-/sharp-win32-x64-0.33.5.tgz#56f00962ff0c4e0eb93d34a047d29fa995e3e342"
   integrity sha512-MpY/o8/8kj+EcnxwvrP4aTJSWw/aZ7JIGR4aBeZkZw5B7/Jn+tY9/VNwtcoGmdT7GfggGIU4kygOMSbYnOrAbg==
 
-"@kinde-oss/kinde-auth-nextjs@^2.5.6":
+"@kinde-oss/kinde-auth-nextjs@^2.8.6":
   version "2.8.6"
   resolved "https://registry.yarnpkg.com/@kinde-oss/kinde-auth-nextjs/-/kinde-auth-nextjs-2.8.6.tgz#c27610cc0672b86f481104cce6237584f14888b8"
   integrity sha512-AvBu3Aq2NZOj7mSbI1l3Pxnd9TBoFjL0ltrml4+Olbwd2p7vIdX1AMP9eJX8mt3igxQYcxFEJnDj5KdA59YBJA==
@@ -261,10 +261,10 @@
     "@typescript-eslint/parser" "^8.30.1"
     uncrypto "^0.1.3"
 
-"@kinde/infrastructure@^0.4.0":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@kinde/infrastructure/-/infrastructure-0.4.1.tgz#5a1f2ce1d5c9009b41e6ca7f12668ae2515285d6"
-  integrity sha512-ceHIImBHoHODKO4zT+0yA1dhyRgFGNGjgLDGMiKp++jQHmTbiVL5InWxMJJkic1SliC2drCSse0XSXvRvsX6wQ==
+"@kinde/infrastructure@^0.7.2":
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/@kinde/infrastructure/-/infrastructure-0.7.2.tgz#c3b3fc46a1efadfc6a2f8f37c338e0e8c91f2fe5"
+  integrity sha512-vyD0ZGPSppuMOxWA0iLWqRwj7L61atXBNXX5bwZVFIzYjiqh1qb/4Y+brPis4mTgfhaLy6EqTvCA6tAkwtRuXg==
 
 "@kinde/js-utils@0.19.0":
   version "0.19.0"
