@@ -57,7 +57,7 @@ export const Layout = ({
         />
         {getKindeRequiredCSS()}
         {getKindeRequiredJS()}
-        <style nonce={getKindeNonce()}>
+          <style nonce={getKindeNonce()}>
           {`
               .header-container {
                 padding: 1rem 2rem;
@@ -433,46 +433,37 @@ export const Layout = ({
 
               /* Loading Styles */
               .auth-loading-overlay {
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
-                width: 100% !important;
-                height: 100% !important;
-                background-color: rgba(255, 255, 255, 0.98) !important;
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important;
-                justify-content: center !important;
-                z-index: 999999 !important;
-                transition: none !important;
-                opacity: 1 !important;
-                visibility: visible !important;
-                pointer-events: auto !important;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.9);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+                transition: opacity 0.3s;
               }
 
               .auth-loading-hidden {
-                display: none !important;
-                opacity: 0 !important;
-                pointer-events: none !important;
-                visibility: hidden !important;
+                opacity: 0;
+                pointer-events: none;
               }
 
               /* Custom Spinner */
               .custom-spinner {
-                display: inline-block !important;
-                width: 60px !important;
-                height: 60px !important;
-                border: 6px solid #d4352b !important;
-                border-radius: 50% !important;
-                border-top-color: transparent !important;
-                animation: spin 1s linear infinite !important;
-                box-shadow: 0 0 15px rgba(0, 0, 0, 0.1) !important;
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                border: 5px solid #161616;
+                border-radius: 50%;
+                border-top-color: transparent;
+                animation: spin 1s linear infinite;
               }
 
               @keyframes spin {
-                0% {
-                  transform: rotate(0deg);
-                }
                 to {
                   transform: rotate(360deg);
                 }
@@ -483,205 +474,187 @@ export const Layout = ({
           nonce={getKindeNonce()}
           dangerouslySetInnerHTML={{
             __html: `
-            // Create immediate loading overlay
-            (function() {
-              console.log('Kinde loader script starting...');
+            // Create loading overlay
+            document.addEventListener('DOMContentLoaded', function() {
+              // Create loading elements
+              const loadingOverlay = document.createElement('div');
+              loadingOverlay.className = 'auth-loading-overlay';
+              loadingOverlay.id = 'kinde-auth-loader';
               
-              // Create loader immediately - don't wait for anything
-              function createAndShowLoader() {
-                // Remove any existing loader
-                const existing = document.getElementById('kinde-auth-loader');
-                if (existing) {
-                  existing.remove();
-                }
-                
-                // Add spinner styles
-                if (!document.getElementById('kinde-spinner-styles')) {
-                  const style = document.createElement('style');
-                  style.id = 'kinde-spinner-styles';
-                  style.textContent = \`
-                    @keyframes kinde-spin {
-                      0% { transform: rotate(0deg); }
-                      100% { transform: rotate(360deg); }
-                    }
-                  \`;
-                  document.head.appendChild(style);
-                }
-                
-                // Create overlay
-                const overlay = document.createElement('div');
-                overlay.id = 'kinde-auth-loader';
-                overlay.innerHTML = '<div style="width:60px;height:60px;border:6px solid #d4352b;border-radius:50%;border-top-color:transparent;animation:kinde-spin 1s linear infinite;"></div>';
-                
-                // Apply styles directly
-                Object.assign(overlay.style, {
-                  position: 'fixed',
-                  top: '0',
-                  left: '0',
-                  width: '100%',
-                  height: '100%',
-                  backgroundColor: 'rgba(255, 255, 255, 0.98)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  zIndex: '999999',
-                  opacity: '1'
-                });
-                
-                // Add to body
-                document.body.appendChild(overlay);
-                document.body.style.overflow = 'hidden';
-                
-                console.log('Loader created and shown');
-                return overlay;
-              }
+              const spinner = document.createElement('div');
+              spinner.className = 'custom-spinner';
               
-              // Show loader immediately
-              const loader = createAndShowLoader();
-              let isVisible = true;
-              let hideTimeout = null;
+              const loadingText = document.createElement('p');
+              loadingText.innerText = '';
+              loadingText.style.marginTop = '10px';
               
-              function hideLoader() {
-                if (!isVisible || !loader) return;
-                console.log('Hiding loader');
-                
-                loader.style.opacity = '0';
-                document.body.style.overflow = '';
-                isVisible = false;
-                
+              // Add elements to DOM
+              loadingOverlay.appendChild(spinner);
+              loadingOverlay.appendChild(loadingText);
+              document.body.appendChild(loadingOverlay);
+              
+              // Show loader initially
+              loadingOverlay.classList.remove('auth-loading-hidden');
+              
+              // Hide loader when page is fully loaded
+              window.addEventListener('load', function() {
                 setTimeout(() => {
-                  if (loader && loader.parentNode) {
-                    loader.remove();
-                  }
+                  loadingOverlay.classList.add('auth-loading-hidden');
                 }, 300);
-              }
+              });
               
-              function showLoader() {
-                if (isVisible) return;
-                console.log('Showing loader');
+              // Track navigation completion
+              let navigationTimeout;
+              
+              // Handle browser back/forward navigation
+              window.addEventListener('popstate', function() {
+                // Show loader during browser navigation events
+                loadingOverlay.classList.remove('auth-loading-hidden');
                 
-                if (hideTimeout) {
-                  clearTimeout(hideTimeout);
-                  hideTimeout = null;
+                // Clear any existing timeout
+                if (navigationTimeout) {
+                  clearTimeout(navigationTimeout);
                 }
                 
-                const newLoader = createAndShowLoader();
-                isVisible = true;
-              }
-              
-              function scheduleHide(delay) {
-                if (hideTimeout) clearTimeout(hideTimeout);
-                hideTimeout = setTimeout(hideLoader, delay);
-              }
-              
-              // Hide loader when page loads
-              function handlePageLoad() {
-                console.log('Page loaded, scheduling hide');
-                scheduleHide(500);
-              }
-              
-              if (document.readyState === 'complete') {
-                handlePageLoad();
-              } else {
-                window.addEventListener('load', handlePageLoad);
-              }
-              
-              // Show loader on navigation
-              window.addEventListener('beforeunload', () => {
-                console.log('Before unload - showing loader');
-                showLoader();
+                // Set a timeout to hide the loader
+                navigationTimeout = setTimeout(() => {
+                  loadingOverlay.classList.add('auth-loading-hidden');
+                }, 1500); // 1.5 seconds for browser navigation
               });
               
-              window.addEventListener('popstate', () => {
-                console.log('Popstate - showing loader');
-                showLoader();
-                scheduleHide(1500);
-              });
+              // Intercept history changes (pushState/replaceState)
+              const originalPushState = window.history.pushState;
+              const originalReplaceState = window.history.replaceState;
               
-              // Intercept history API
-              const originalPushState = history.pushState;
-              const originalReplaceState = history.replaceState;
-              
-              history.pushState = function() {
-                console.log('pushState intercepted');
-                showLoader();
+              window.history.pushState = function() {
                 originalPushState.apply(this, arguments);
-                scheduleHide(1500);
-              };
-              
-              history.replaceState = function() {
-                console.log('replaceState intercepted');
-                showLoader();
-                originalReplaceState.apply(this, arguments);
-                scheduleHide(1500);
-              };
-              
-              // Handle clicks on interactive elements
-              document.addEventListener('click', function(e) {
-                const link = e.target.closest('a');
-                const button = e.target.closest('button');
-                const isKindeElement = e.target.closest('.kinde-text-link, .kinde-button-variant-primary');
+                // Show loader when history state changes
+                loadingOverlay.classList.remove('auth-loading-hidden');
                 
-                if (link && link.href) {
-                  // Check if external link
-                  try {
-                    const url = new URL(link.href);
-                    if (url.hostname !== location.hostname) {
-                      console.log('External link clicked');
-                      showLoader();
-                      return; // Don't schedule hide for external links
-                    }
-                  } catch (e) {}
+                // Clear any existing timeout
+                if (navigationTimeout) {
+                  clearTimeout(navigationTimeout);
+                }
+                
+                // Set a timeout to hide the loader
+                navigationTimeout = setTimeout(() => {
+                  loadingOverlay.classList.add('auth-loading-hidden');
+                }, 1500);
+              };
+              
+              window.history.replaceState = function() {
+                originalReplaceState.apply(this, arguments);
+                // Show loader when history state changes
+                loadingOverlay.classList.remove('auth-loading-hidden');
+                
+                // Clear any existing timeout
+                if (navigationTimeout) {
+                  clearTimeout(navigationTimeout);
+                }
+                
+                // Set a timeout to hide the loader
+                navigationTimeout = setTimeout(() => {
+                  loadingOverlay.classList.add('auth-loading-hidden');
+                }, 1500);
+              };
+              
+              // Show loader on any link click within authentication pages
+              document.addEventListener('click', function(e) {
+                const closestLink = e.target.closest('a');
+                const closestButton = e.target.closest('button');
+                // Check if the click is on a payment logo image in the footer
+                const isPaymentLogo = e.target.closest('footer img');
+                
+                const isKindeTextLink = e.target.classList && (
+                  e.target.classList.contains('kinde-text-link') || 
+                  (e.target.parentElement && e.target.parentElement.classList.contains('kinde-text-link'))
+                );
+                const isPrimaryButton = e.target.classList && (
+                  e.target.classList.contains('kinde-button-variant-primary') ||
+                  (e.target.closest('.kinde-button-variant-primary'))
+                );
+                
+                // Skip showing loader for payment logo images that aren't wrapped in links
+                if (isPaymentLogo && !closestLink) {
+                  return;
+                }
+                
+                if (isKindeTextLink || 
+                    (closestLink && closestLink.href) || 
+                    (closestButton && closestButton.type === 'submit') ||
+                    isPrimaryButton) {
                   
-                  console.log('Internal link clicked');
-                  showLoader();
-                  scheduleHide(1000);
-                } else if ((button && button.type === 'submit') || isKindeElement) {
-                  console.log('Button/Kinde element clicked');
-                  showLoader();
-                  scheduleHide(3000);
+                  // Show loader
+                  loadingOverlay.classList.remove('auth-loading-hidden');
+                  
+                  // Clear any existing timeout
+                  if (navigationTimeout) {
+                    clearTimeout(navigationTimeout);
+                  }
+                  
+                  // For external links, don't set a timeout to hide the loader
+                  // since we want the loader to remain visible until navigation completes
+                  if (closestLink && closestLink.href && 
+                      (closestLink.href.indexOf('http://') === 0 || 
+                       closestLink.href.indexOf('https://') === 0) &&
+                      closestLink.hostname !== window.location.hostname) {
+                    // For external links, don't hide the loader automatically
+                    // The page will fully navigate away, so the loader should stay visible
+                    return;
+                  }
+                  
+                  // Set timeout based on what was clicked
+                  // Use shorter timeout for text links, longer for buttons
+                  let timeoutDuration = 1000; // default 1 second for text links
+                  
+                  if (isPrimaryButton || (closestButton && closestButton.type === 'submit')) {
+                    timeoutDuration = 3000; // 3 seconds for primary buttons and submit buttons
+                  }
+                  
+                  // Set a backup timeout to hide the loader if navigation doesn't complete
+                  navigationTimeout = setTimeout(() => {
+                    loadingOverlay.classList.add('auth-loading-hidden');
+                  }, timeoutDuration);
                 }
               });
               
               // Handle form submissions
               document.addEventListener('submit', function(e) {
-                console.log('Form submitted');
-                showLoader();
-                scheduleHide(3000);
+                loadingOverlay.classList.remove('auth-loading-hidden');
               });
               
-              // Monitor for Kinde content
-              function checkForKindeContent() {
-                const kindeRoot = document.querySelector('[data-kinde-root]');
-                const kindeButtons = document.querySelectorAll('.kinde-button-variant-primary');
+              // Monitor for DOM changes that indicate page load completion
+              const observer = new MutationObserver(function(mutations) {
+                // Check if mutations indicate auth content has loaded
+                const kindeContentLoaded = mutations.some(mutation => {
+                  return mutation.addedNodes.length > 0 || 
+                         (mutation.target.classList && 
+                          mutation.target.classList.contains('kinde-button-variant-primary'));
+                });
                 
-                if (kindeRoot || kindeButtons.length > 0) {
-                  console.log('Kinde content detected');
-                  scheduleHide(300);
-                  return true;
+                if (kindeContentLoaded) {
+                  setTimeout(() => {
+                    loadingOverlay.classList.add('auth-loading-hidden');
+                    if (navigationTimeout) {
+                      clearTimeout(navigationTimeout);
+                    }
+                  }, 300);
                 }
-                return false;
-              }
+              });
               
-              // Check periodically for content
-              const contentChecker = setInterval(() => {
-                if (checkForKindeContent()) {
-                  clearInterval(contentChecker);
+              // Start observing once DOM is loaded
+              setTimeout(() => {
+                const kindeRoot = document.querySelector('[data-kinde-root]');
+                if (kindeRoot) {
+                  observer.observe(kindeRoot, {
+                    childList: true,
+                    subtree: true,
+                    attributes: true,
+                    characterData: false
+                  });
                 }
-              }, 100);
-              
-              // Clear checker after 10 seconds
-              setTimeout(() => clearInterval(contentChecker), 10000);
-              
-              // Expose for debugging
-              window.kindeLoader = {
-                show: showLoader,
-                hide: hideLoader,
-                isVisible: () => isVisible
-              };
-              
-              console.log('Kinde loader initialized');
-            })();
+              }, 500);
+            });
           `,
           }}
         />
