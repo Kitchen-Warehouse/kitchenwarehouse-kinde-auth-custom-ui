@@ -30,7 +30,7 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
 
   const userId = event.context.user.id
 
-  console.log(event, userId)
+  console.log('User ID:', userId)
 
   // Get customer by Kinde ID
   const customerData = await getCustomerByKindeId(userId)
@@ -69,9 +69,9 @@ async function getCustomerByKindeId(kindeCustomerId: string) {
       body: requestBody
     })
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
+    // if (!response.ok) {
+    //   throw new Error(`HTTP error! status: ${response.status}`)
+    // }
 
     const data = await response.json()
     console.log({data})
