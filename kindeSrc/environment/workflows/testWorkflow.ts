@@ -44,6 +44,7 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
 }
 
 async function getCustomerByKindeId(kindeCustomerId: string) {
+  console.log('Kinde Customer ID:', kindeCustomerId)
   try {
     // Create URLSearchParams for the body
     const requestBody = new URLSearchParams({
@@ -66,7 +67,8 @@ async function getCustomerByKindeId(kindeCustomerId: string) {
         'coFE-Custom-Configuration': '',
         'Frontastic-Session': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6IjE3YTE4NzUyIn0.eyJhY2NvdW50Ijp7ImVtYWlsIjoibmFyZW5kcmFAY29tcG9zZS5jby5pbiJ9fQ.t8wU5ePhcadLGw5Nm28NWSB4Hj77Fzi_YKBqNTynhvc'
       },
-      body: requestBody
+      body: requestBody,
+      responseFormat: 'json'
     })
 
     // if (!response.ok) {
