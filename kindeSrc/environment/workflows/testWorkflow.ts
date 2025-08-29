@@ -57,6 +57,27 @@ export const workflowSettings = {
   },
 };
 
+// Alternative delay function that works in Kinde environment
+async function delay(ms: number) {
+  return new Promise<void>((resolve) => {
+    const start = Date.now();
+    const check = () => {
+      if (Date.now() - start >= ms) {
+        resolve();
+      } else {
+        // Use setImmediate if available, otherwise use a minimal delay
+        if (typeof setImmediate !== 'undefined') {
+          setImmediate(check);
+        } else {
+          // Fallback to a busy wait with minimal CPU usage
+          Promise.resolve().then(check);
+        }
+      }
+    };
+    check();
+  });
+}
+
 export default async function TestWorkflow(event: onUserTokenGeneratedEvent) {
   const accessToken = accessTokenCustomClaims<{
     customer_id: string;
@@ -64,7 +85,13 @@ export default async function TestWorkflow(event: onUserTokenGeneratedEvent) {
   console.log({ accessToken });
   const userId = event.context.user.id;
   console.log({ userId });
+  
+  // Add a 15 second delay before getting customer data
+  console.log('Waiting 15 seconds before API call...');
+  await delay(15000);
+  
   // Get customer by Kinde ID
+  console.log('Starting getCustomerByKindeId call...');
   const customerData = await getCustomerByKindeId(userId);
   accessToken.customer_id = customerData;
   console.log({ customerData });
