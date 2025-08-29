@@ -24,19 +24,26 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
   }>();
   console.log('Access Token', accessToken);
 
-  console.log({ event });
-  const isNewKindeUser = event.context.auth.isNewUserRecordCreated;
-  console.log({ userId: event.context.user, isNewKindeUser });
+  // console.log({ event });
+  // const isNewKindeUser = event.context.auth.isNewUserRecordCreated;
+  // console.log({ userId: event.context.user, isNewKindeUser });
 
   const userId = event.context.user.id;
-
-  console.log('User ID:', userId);
+  accessToken.customerId = userId;
+  // console.log('User ID:', userId);
 
   // Get customer by Kinde ID
-  // Add a 15 second delay
-  await new Promise(resolve => setTimeout(resolve, 15000));
-  const customerData = await getCustomerByKindeId(userId);
-  console.log('Customer Data:', customerData);
+  // Add a 10 second delay
+  console.log('Waiting 10 seconds before API call...');
+  await new Promise(resolve => setTimeout(resolve, 10000));
+  
+  console.log('Starting getCustomerByKindeId call...');
+  try {
+    const customerData = await getCustomerByKindeId(userId);
+    console.log('Customer Data received:', customerData);
+  } catch (error) {
+    console.error('Failed to get customer data:', error);
+  }
 
   // const data = await getCustomerId()
 
@@ -48,32 +55,38 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
 async function getCustomerByKindeId(kindeCustomerId: string) {
   console.log('Kinde Customer ID:', kindeCustomerId);
   try {
-    // Create URLSearchParams for the body
-    // const requestBody = new URLSearchParams({
-    //   token: 'Bearer xx',
-    //   skipIntrospection: 'true',
-    //   kindeCustomerId: kindeCustomerId
-    // })
+    console.log('Starting API request...');
+    
+    const url = `https://kwh-kitchenwarehouse.frontastic.rocks/frontastic/action/account/getcustomerbykindeid?kindeCustomerId=${kindeCustomerId}`;
+    console.log('Request URL:', url);
 
-    const response = await fetch(
-      `https://kwh-kitchenwarehouse.frontastic.rocks/frontastic/action/account/getcustomerbykindeid?kindeCustomerId=${kindeCustomerId}`,
-      {
-        method: 'POST',
-        headers: {
-          'Commercetools-Frontend-Extension-Version': 'devnarendra',
-          Accept: 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      }
-    );
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Commercetools-Frontend-Extension-Version': 'devnarendra',
+        Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
 
-    // if (!response.ok) {
-    //   throw new Error(`HTTP error! status: ${response.status}`)
-    // }
-    console.log({ response: response?.data?.data });
+    console.log('Response status:', response.status);
+    console.log('Response ok:', response.ok);
+    
+    if (!response.ok) {
+      console.error(`HTTP error! status: ${response.status}`);
+      const errorText = await response.text();
+      console.error('Error response:', errorText);
+      throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+    }
+
+    console.log('Full response object:', response);
+    console.log('Response data:', response?.data);
+    console.log('Response data.data:', response?.data?.data);
+    
     return response;
   } catch (error) {
     console.error('Error fetching customer by Kinde ID:', error);
+    console.error('Error details:', JSON.stringify(error, null, 2));
     throw error;
   }
 }
