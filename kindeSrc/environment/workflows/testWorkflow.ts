@@ -33,6 +33,8 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
   console.log('User ID:', userId);
 
   // Get customer by Kinde ID
+  // Add a 15 second delay
+  await new Promise(resolve => setTimeout(resolve, 15000));
   const customerData = await getCustomerByKindeId(userId);
   console.log('Customer Data:', customerData);
 
@@ -75,18 +77,3 @@ async function getCustomerByKindeId(kindeCustomerId: string) {
     throw error;
   }
 }
-
-// curl --location 'https://auth-staging.kitchenwarehouse.com.au/oauth2/token' \
-// --header 'content-type: application/x-www-form-urlencoded' \
-// --data-urlencode 'grant_type=client_credentials' \
-// --data-urlencode 'client_id=6c0470e618ab41cfb0cde02661df8734' \
-// --data-urlencode 'client_secret=sfM0FxafvSY3WdhttflhOrsva9Q5T0rB2NkxYMWoHXSG03k8tzkW' \
-// --data-urlencode 'audience=https://kitchenwarehouse-staging.au.kinde.com/api'
-
-//     const response = await fetch(`${url}/oauth2/token`, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/x-www-form-urlencoded',
-//       },
-//       body: body.toString(),
-//     });
