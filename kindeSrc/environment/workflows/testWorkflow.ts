@@ -2,12 +2,51 @@ import {
   WorkflowTrigger,
   accessTokenCustomClaims,
   fetch,
-  onPostAuthenticationEvent,
+  onUserTokenGeneratedEvent,
+  // onPostAuthenticationEvent,
 } from '@kinde/infrastructure';
 
+// export const workflowSettings = {
+//   id: 'postAuthentication',
+//   trigger: WorkflowTrigger.PostAuthentication,
+//   bindings: {
+//     'kinde.accessToken': {},
+//     'kinde.localization': {},
+//     'kinde.fetch': {},
+//     'kinde.env': {},
+//     'kinde.mfa': {},
+//     url: {},
+//   },
+// };
+
+// export default async function TestWorkflow(event: onPostAuthenticationEvent) {
+//   const accessToken = accessTokenCustomClaims<{
+//     customerId: string;
+//   }>();
+//   console.log('Access Token', accessToken);
+
+//   // console.log({ event });
+//   // const isNewKindeUser = event.context.auth.isNewUserRecordCreated;
+//   // console.log({ userId: event.context.user, isNewKindeUser });
+
+//   const userId = event.context.user.id;
+//   accessToken.customerId = userId;
+//   // console.log('User ID:', userId);
+
+//   // Get customer by Kinde ID
+//   const customerData = await getCustomerByKindeId(userId);
+//   console.log('Customer Data:', customerData);
+
+//   // const data = await getCustomerId()
+
+//   // console.log('DATAAA', data)
+
+//   // Need email ID (can be in event)
+// }
+
 export const workflowSettings = {
-  id: 'postAuthentication',
-  trigger: WorkflowTrigger.PostAuthentication,
+  id: 'userTokenGeneration',
+  trigger: WorkflowTrigger.UserTokenGeneration,
   bindings: {
     'kinde.accessToken': {},
     'kinde.localization': {},
@@ -18,29 +57,20 @@ export const workflowSettings = {
   },
 };
 
-export default async function TestWorkflow(event: onPostAuthenticationEvent) {
+export default async function TestWorkflow(event: onUserTokenGeneratedEvent) {
   const accessToken = accessTokenCustomClaims<{
-    customerId: string;
+    customer_id: string;
   }>();
-  console.log('Access Token', accessToken);
-
-  // console.log({ event });
-  // const isNewKindeUser = event.context.auth.isNewUserRecordCreated;
-  // console.log({ userId: event.context.user, isNewKindeUser });
-
+  console.log({ accessToken });
   const userId = event.context.user.id;
-  accessToken.customerId = userId;
-  // console.log('User ID:', userId);
-
+  console.log({ userId });
   // Get customer by Kinde ID
   const customerData = await getCustomerByKindeId(userId);
-  console.log('Customer Data:', customerData);
-
-  // const data = await getCustomerId()
-
-  // console.log('DATAAA', data)
-
-  // Need email ID (can be in event)
+  accessToken.customer_id = customerData;
+  console.log({ customerData });
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  accessToken.user_properties.customer_id = customerData;
 }
 
 async function getCustomerByKindeId(kindeCustomerId: string) {
