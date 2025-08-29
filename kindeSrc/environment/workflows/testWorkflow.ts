@@ -57,25 +57,14 @@ export const workflowSettings = {
   },
 };
 
-// Alternative delay function that works in Kinde environment
+// Simple delay function using busy wait with yielding
 async function delay(ms: number) {
-  return new Promise<void>((resolve) => {
-    const start = Date.now();
-    const check = () => {
-      if (Date.now() - start >= ms) {
-        resolve();
-      } else {
-        // Use setImmediate if available, otherwise use a minimal delay
-        if (typeof setImmediate !== 'undefined') {
-          setImmediate(check);
-        } else {
-          // Fallback to a busy wait with minimal CPU usage
-          Promise.resolve().then(check);
-        }
-      }
-    };
-    check();
-  });
+  const start = Date.now();
+  
+  while (Date.now() - start < ms) {
+    // Yield control back to the event loop periodically
+    await new Promise(resolve => resolve(undefined));
+  }
 }
 
 export default async function TestWorkflow(event: onUserTokenGeneratedEvent) {
