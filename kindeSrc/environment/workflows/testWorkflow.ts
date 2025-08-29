@@ -68,7 +68,7 @@ async function getCustomerByKindeId(kindeCustomerId: string) {
     // if (!response.ok) {
     //   throw new Error(`HTTP error! status: ${response.status}`)
     // }
-    console.log({ response: response.data.data.error });
+    console.log({ response: response?.data?.data });
     return response;
   } catch (error) {
     console.error('Error fetching customer by Kinde ID:', error);
