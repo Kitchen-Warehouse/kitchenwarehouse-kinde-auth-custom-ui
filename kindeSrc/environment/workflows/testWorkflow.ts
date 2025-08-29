@@ -3,7 +3,7 @@ import {
   accessTokenCustomClaims,
   fetch,
   onPostAuthenticationEvent,
-} from '@kinde/infrastructure'
+} from '@kinde/infrastructure';
 
 export const workflowSettings = {
   id: 'postAuthentication',
@@ -16,25 +16,25 @@ export const workflowSettings = {
     'kinde.mfa': {},
     url: {},
   },
-}
+};
 
 export default async function TestWorkflow(event: onPostAuthenticationEvent) {
   const accessToken = accessTokenCustomClaims<{
-    customerId: string
-  }>()
-  console.log('Access Token', accessToken)
+    customerId: string;
+  }>();
+  console.log('Access Token', accessToken);
 
-  console.log({ event })
-  const isNewKindeUser = event.context.auth.isNewUserRecordCreated
-  console.log({ userId: event.context.user, isNewKindeUser })
+  console.log({ event });
+  const isNewKindeUser = event.context.auth.isNewUserRecordCreated;
+  console.log({ userId: event.context.user, isNewKindeUser });
 
-  const userId = event.context.user.id
+  const userId = event.context.user.id;
 
-  console.log('User ID:', userId)
+  console.log('User ID:', userId);
 
   // Get customer by Kinde ID
-  const customerData = await getCustomerByKindeId(userId)
-  console.log('Customer Data:', customerData)
+  const customerData = await getCustomerByKindeId(userId);
+  console.log('Customer Data:', customerData);
 
   // const data = await getCustomerId()
 
@@ -44,43 +44,37 @@ export default async function TestWorkflow(event: onPostAuthenticationEvent) {
 }
 
 async function getCustomerByKindeId(kindeCustomerId: string) {
-  console.log('Kinde Customer ID:', kindeCustomerId)
+  console.log('Kinde Customer ID:', kindeCustomerId);
   try {
     // Create URLSearchParams for the body
-    const requestBody = new URLSearchParams({
-      token: 'Bearer xx',
-      skipIntrospection: 'true',
-      kindeCustomerId: kindeCustomerId
-    })
+    // const requestBody = new URLSearchParams({
+    //   token: 'Bearer xx',
+    //   skipIntrospection: 'true',
+    //   kindeCustomerId: kindeCustomerId
+    // })
 
-    const response = await fetch('https://kwh-kitchenwarehouse.frontastic.rocks/frontastic/action/account/getcustomerbykindeid', {
-      method: 'POST',
-      headers: {
-        'Commercetools-Frontend-Extension-Version': 'devnarendra',
-        'sec-ch-ua-platform': '"macOS"',
-        'Referer': 'http://localhost:3000/',
-        'sec-ch-ua': '"Not;A=Brand";v="99", "Google Chrome";v="139", "Chromium";v="139"',
-        'sec-ch-ua-mobile': '?0',
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36',
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'coFE-Custom-Configuration': '',
-        'Frontastic-Session': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6IjE3YTE4NzUyIn0.eyJhY2NvdW50Ijp7ImVtYWlsIjoibmFyZW5kcmFAY29tcG9zZS5jby5pbiJ9fQ.t8wU5ePhcadLGw5Nm28NWSB4Hj77Fzi_YKBqNTynhvc'
-      },
-      body: requestBody,
-      responseFormat: 'json'
-    })
+    const response = await fetch(
+      `https://kwh-kitchenwarehouse.frontastic.rocks/frontastic/action/account/getcustomerbykindeid?kindeCustomerId=${kindeCustomerId}`,
+      {
+        method: 'POST',
+        headers: {
+          'Commercetools-Frontend-Extension-Version': 'devnarendra',
+          Accept: 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    );
 
     // if (!response.ok) {
     //   throw new Error(`HTTP error! status: ${response.status}`)
     // }
 
     // const data = await response.json()
-    console.log({response})
-    return response
+    console.log({ response });
+    return response;
   } catch (error) {
-    console.error('Error fetching customer by Kinde ID:', error)
-    throw error
+    console.error('Error fetching customer by Kinde ID:', error);
+    throw error;
   }
 }
 
