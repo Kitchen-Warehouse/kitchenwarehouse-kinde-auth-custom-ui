@@ -57,16 +57,6 @@ export const workflowSettings = {
   },
 };
 
-// Simple delay function using busy wait with yielding
-async function delay(ms: number) {
-  const start = Date.now();
-  
-  while (Date.now() - start < ms) {
-    // Yield control back to the event loop periodically
-    await new Promise(resolve => resolve(undefined));
-  }
-}
-
 export default async function TestWorkflow(event: onUserTokenGeneratedEvent) {
   const accessToken = accessTokenCustomClaims<{
     customer_id: string;
@@ -75,11 +65,6 @@ export default async function TestWorkflow(event: onUserTokenGeneratedEvent) {
   const userId = event.context.user.id;
   console.log({ userId });
   
-  // Add a 15 second delay before getting customer data
-  console.log('Waiting 15 seconds before API call...');
-  await delay(15000);
-  
-  // Get customer by Kinde ID
   console.log('Starting getCustomerByKindeId call...');
   const customerData = await getCustomerByKindeId(userId);
   accessToken.customer_id = customerData;
