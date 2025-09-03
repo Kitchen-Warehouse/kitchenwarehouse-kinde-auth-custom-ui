@@ -1,7 +1,7 @@
 import {
   WorkflowTrigger,
   accessTokenCustomClaims,
-  // fetch,
+  fetch,
   onUserTokenGeneratedEvent,
   // onPostAuthenticationEvent,
 } from '@kinde/infrastructure';
