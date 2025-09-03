@@ -71,7 +71,7 @@ export default async function TestWorkflow(event: onUserTokenGeneratedEvent) {
   const customerData = await getCustomerByKindeId(userId);
   console.log({ customerData, customerId: customerData?.data?.customer?.id, accessToken: accessToken?.user_properties?.customer_id });
   if(customerData?.data?.customer?.id){
-    accessToken.customer_id = `${customerData.data.customer.id}-test`;
+    accessToken.customer_id = customerData.data.customer.id;
     console.log('Populated the customer id');
   } else {
     console.log('Customer ID not found');
@@ -79,7 +79,6 @@ export default async function TestWorkflow(event: onUserTokenGeneratedEvent) {
 }
 
 async function getCustomerByKindeId(kindeCustomerId: string) {
-  console.log('Kinde Customer ID:', kindeCustomerId);
   try {
     const response = await fetch(
       `https://kwh-kitchenwarehouse.frontastic.rocks/frontastic/action/account/getcustomerbykindeid?kindeCustomerId=${kindeCustomerId}`,
@@ -92,7 +91,6 @@ async function getCustomerByKindeId(kindeCustomerId: string) {
         },
       }
     );
-    console.log({ response: response?.data?.data });
     return response;
   } catch (error) {
     console.error('Error fetching customer by Kinde ID:', error);
