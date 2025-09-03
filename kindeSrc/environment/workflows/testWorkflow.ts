@@ -59,30 +59,26 @@ export const workflowSettings = {
 
 export default async function TestWorkflow(event: onUserTokenGeneratedEvent) {
   const accessToken = accessTokenCustomClaims<{
-    customer_id: string;
+    user_properties: {
+      customer_id: string;
+    }
   }>();
-  console.log({ accessToken, event });
   const userId = event.context.user.id;
   console.log({ userId });
   
-  console.log('Starting getCustomerByKindeId call...');
   const customerData = await getCustomerByKindeId(userId);
-  // accessToken.customer_id = customerData;
   console.log({ customerData });
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // accessToken.user_properties.customer_id = customerData;
+  if(customerData?.data?.customer?.id){
+    accessToken.user_properties.customer_id = customerData.data.customer.id;
+    console.log('Populated the customer id');
+  } else {
+    console.log('Customer ID not found');
+  }
 }
 
 async function getCustomerByKindeId(kindeCustomerId: string) {
   console.log('Kinde Customer ID:', kindeCustomerId);
   try {
-    // Create URLSearchParams for the body
-    // const requestBody = new URLSearchParams({
-    //   token: 'Bearer xx',
-    //   skipIntrospection: 'true',
-    //   kindeCustomerId: kindeCustomerId
-    // })
-
     const response = await fetch(
       `https://kwh-kitchenwarehouse.frontastic.rocks/frontastic/action/account/getcustomerbykindeid?kindeCustomerId=${kindeCustomerId}`,
       {
@@ -94,10 +90,6 @@ async function getCustomerByKindeId(kindeCustomerId: string) {
         },
       }
     );
-
-    // if (!response.ok) {
-    //   throw new Error(`HTTP error! status: ${response.status}`)
-    // }
     console.log({ response: response?.data?.data });
     return response;
   } catch (error) {
