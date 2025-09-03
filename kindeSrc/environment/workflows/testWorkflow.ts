@@ -70,12 +70,9 @@ export default async function TestWorkflow(event: onUserTokenGeneratedEvent) {
   
   const customerData = await getCustomerByKindeId(userId);
   console.log({ customerData });
-  if(customerData?.data?.customer?.id){
-
-    accessToken.customer_id = customerData.data.customer.id;
-  }
   if(customerData?.data?.customer?.id && accessToken?.user_properties?.customer_id){
-    accessToken.user_properties.customer_id = customerData.data.customer.id;
+    // accessToken.user_properties.customer_id = customerData.data.customer.id;
+    accessToken.user_properties.customer_id = 'test';
     console.log('Populated the customer id');
   } else {
     console.log('Customer ID not found');
