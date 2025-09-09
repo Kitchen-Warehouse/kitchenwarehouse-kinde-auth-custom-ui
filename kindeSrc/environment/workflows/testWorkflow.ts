@@ -90,14 +90,12 @@ async function getCustomerByKindeId(kindeCustomerId: string) {
         method: 'POST',
         headers: {
           'Commercetools-Frontend-Extension-Version': 'devnarendra',
-          Accept: 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded',
         },
       }
     );
     console.log('Response from getCustomerByKindeId:', response);
     return response;
   } catch (error) {
-    console.error('Error fetching customer by Kinde ID:', error);
+    console.log('Error fetching customer by Kinde ID:', error);
   }
 }
