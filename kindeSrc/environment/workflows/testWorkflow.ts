@@ -95,6 +95,7 @@ async function getCustomerByKindeId(kindeCustomerId: string) {
         },
       }
     );
+    console.log('Response from getCustomerByKindeId:', response);
     return response;
   } catch (error) {
     console.error('Error fetching customer by Kinde ID:', error);
