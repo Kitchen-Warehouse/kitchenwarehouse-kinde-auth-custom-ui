@@ -1,22 +1,22 @@
 // CSS Variables configuration
 const kindeVariables = {
-    baseFontFamily:
-      "-apple-system, system-ui, BlinkMacSystemFont, Helvetica, Arial, Segoe UI, Roboto, sans-serif",
-    controlSelectTextBorderRadius: "12px",
-    buttonPrimaryBackgroundColor: "#706EDE",
-    buttonPrimaryColor: "#fff",
-    buttonBorderRadius: "12px",
-    buttonSecondaryBackgroundColor: "#fff",
-    buttonSecondaryBorderWidth: "1px",
-    buttonSecondaryBorderColor: "#ccc",
-    buttonSecondaryBorderStyle: "solid",
-    buttonSecondaryBorderRadius: "12px",
-    buttonBlockSize: "44px",
-    controlSelectTextBlockSize: "44px",
-    controlSelectTextBorderColor: "#ccc",
-  } as const;
-  
-  export const generateCSSVariables = (): string => `
+  baseFontFamily:
+    '-apple-system, system-ui, BlinkMacSystemFont, Helvetica, Arial, Segoe UI, Roboto, sans-serif',
+  controlSelectTextBorderRadius: '12px',
+  buttonPrimaryBackgroundColor: '#706EDE',
+  buttonPrimaryColor: '#fff',
+  buttonBorderRadius: '12px',
+  buttonSecondaryBackgroundColor: '#fff',
+  buttonSecondaryBorderWidth: '1px',
+  buttonSecondaryBorderColor: '#ccc',
+  buttonSecondaryBorderStyle: 'solid',
+  buttonSecondaryBorderRadius: '12px',
+  buttonBlockSize: '44px',
+  controlSelectTextBlockSize: '44px',
+  controlSelectTextBorderColor: '#ccc',
+} as const;
+
+export const generateCSSVariables = (): string => `
     :root {
       --kinde-base-font-family: ${kindeVariables.baseFontFamily};
       --kinde-control-select-text-border-radius: ${kindeVariables.controlSelectTextBorderRadius};

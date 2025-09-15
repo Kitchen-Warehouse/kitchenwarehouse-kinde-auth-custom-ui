@@ -8,10 +8,10 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/(.*)",
+        source: '/(.*)',
         headers: [
           {
-            key: "Content-Security-Policy",
+            key: 'Content-Security-Policy',
             value: "default-src * 'unsafe-inline' 'unsafe-eval';",
           },
         ],
