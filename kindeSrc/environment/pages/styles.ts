@@ -14,7 +14,7 @@ const kindeVariables = {
   buttonBlockSize: '44px',
   controlSelectTextBlockSize: '44px',
   controlSelectTextBorderColor: '#ccc',
-} as const
+} as const;
 
 export const generateCSSVariables = (): string => `
     :root {
@@ -48,4 +48,4 @@ export const generateCSSVariables = (): string => `
       border-bottom: 1px solid #ccc;
     }
   
-  `
+  `;
