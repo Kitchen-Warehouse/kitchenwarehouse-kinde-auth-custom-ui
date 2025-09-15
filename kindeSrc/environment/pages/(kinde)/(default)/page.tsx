@@ -1,14 +1,14 @@
-'use server'
+'use server';
 
 import {
   getKindeWidget,
   fetch,
   type KindePageEvent,
-} from '@kinde/infrastructure'
-import React from 'react'
+} from '@kinde/infrastructure';
+import React from 'react';
 // @ts-expect-error: renderToString is not available in the server environment
-import { renderToString } from 'react-dom/server.browser'
-import Layout from '../../layout'
+import { renderToString } from 'react-dom/server.browser';
+import Layout from '../../layout';
 
 const DefaultPage: React.FC<KindePageEvent> = async ({ context, request }) => {
   const res = await fetch(
@@ -17,21 +17,22 @@ const DefaultPage: React.FC<KindePageEvent> = async ({ context, request }) => {
       headers: {},
       method: 'GET',
     }
-  )
+  );
   const {
     loginPageImage,
     signInFormTextTop,
     signupFormTextTop,
     signInFormTextBottom,
     signupFormTextBottom,
-  } = res?.data?.results?.[0]?.data || {}
-  const isUserOnLoginOrRegisterPage = request?.route?.flow
+  } = res?.data?.results?.[0]?.data || {};
+  const isUserOnLoginOrRegisterPage = request?.route?.flow;
 
   return (
     <Layout
       context={context}
       request={request}
-      props={res?.data?.results?.[0]?.data}>
+      props={res?.data?.results?.[0]?.data}
+    >
       <div className='container'>
         <div className='login-form-wrapper'>
           {signInFormTextTop && isUserOnLoginOrRegisterPage === 'login' && (
@@ -80,11 +81,11 @@ const DefaultPage: React.FC<KindePageEvent> = async ({ context, request }) => {
         )}
       </div>
     </Layout>
-  )
-}
+  );
+};
 
 // Page Component
 export default async function Page(event: KindePageEvent): Promise<string> {
-  const page = await DefaultPage(event)
-  return renderToString(page)
+  const page = await DefaultPage(event);
+  return renderToString(page);
 }
